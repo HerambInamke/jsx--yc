@@ -3,7 +3,7 @@ export default function PackagesPage() {
     {
       name: 'Standard Pass',
       price: '₹1',
-      features: ['1-Day Access', 'Standard Viewing Areas', 'Food Court Access'],
+      features: ['1-Day Access', 'Standard Viewing Areas', 'Food Court Access','no pickup'],
     },
     {
       name: 'VIP Pass',

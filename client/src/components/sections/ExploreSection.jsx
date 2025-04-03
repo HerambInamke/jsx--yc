@@ -5,22 +5,22 @@ import ArtistCard from '../common/ArtistCard'
 const artists = [
   {
     id: '1',
-    name: 'Artist Name 1',
-    image: 'client/public/YC (IMG)/593532f2da6dde2b77402dcc.webp',
+    name: 'Electronic Night',
+    image: '/YC (IMG)/593532f2da6dde2b77402dcc.webp',
     colorDot: 'red',
     isFavorite: false,
   },
   {
     id: '2',
-    name: 'Artist Name 2',
-    image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f',
+    name: 'Rock Festival',
+    image: '/YC (IMG)/cold.webp',
     colorDot: 'blue',
     isFavorite: true,
   },
   {
     id: '3',
-    name: 'Artist Name 3',
-    image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745',
+    name: 'Summer Concert',
+    image: '/YC (IMG)/GettyImages-2149383523-3.webp',
     colorDot: 'yellow',
     isFavorite: false,
   },
@@ -30,19 +30,16 @@ export default function ExploreSection() {
   const scrollRef = useRef(null)
 
   return (
-    <section className="py-12">
+    <section className="py-20 bg-gray-50">
       <div className="container">
-        <SectionHeading title="EXPLORE" />
+        <SectionHeading title="EXPLORE EVENTS" />
         
         <div
           ref={scrollRef}
-          className="flex gap-6 overflow-x-auto pb-6 snap-x snap-mandatory"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {artists.map((artist) => (
-            <div
-              key={artist.id}
-              className="min-w-[300px] sm:min-w-[350px] snap-start"
-            >
+            <div key={artist.id}>
               <ArtistCard {...artist} onFavoriteToggle={() => {}} />
             </div>
           ))}

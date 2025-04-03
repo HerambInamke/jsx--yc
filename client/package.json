@@ -10,22 +10,21 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroicons/react": "^2.1.1",
+    "clsx": "^2.1.0",
+    "framer-motion": "^11.0.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^6.22.3",
-    "@heroicons/react": "^2.1.1",
-    "clsx": "^2.1.0",
-    "tailwind-merge": "^2.1.0",
-    "framer-motion": "^11.0.8"
+    "tailwind-merge": "^2.1.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.21.0",
+    "@vitejs/plugin-react": "^4.3.4",
     "@vitejs/plugin-react-swc": "^3.8.0",
     "autoprefixer": "^10.4.18",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.1.0",
     "eslint-plugin-react-refresh": "^0.4.19",
-    "globals": "^15.15.0",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
     "vite": "^6.2.0"

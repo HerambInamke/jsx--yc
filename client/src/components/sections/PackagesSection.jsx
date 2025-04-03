@@ -6,7 +6,7 @@ import PackageCard from '../common/PackageCard'
 const packages = [
   {
     id: '1',
-    image: 'client/public/YC (IMG)/cold.webp',
+    image: '/YC (IMG)/cold.webp',
     concertName: 'Persona',
     artistName: 'Various Artists',
     timeRange: '1 PM - 6:30 PM',
@@ -16,33 +16,23 @@ const packages = [
   },
   {
     id: '2',
-    image: 'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f',
-    concertName: 'Rock Night',
-    artistName: 'Rock Band',
+    image: '/YC (IMG)/593532f2da6dde2b77402dcc.webp',
+    concertName: 'Electronic Dreams',
+    artistName: 'EDM Artists',
     timeRange: '7 PM - 11:30 PM',
     locationDetails: '456 Rock St, Music City, MC 12345',
-    hotelName: 'Rock Hotel',
+    hotelName: 'Rhythm Hotel',
     hotelDetails: 'Theme rooms with sound systems',
   },
   {
     id: '3',
-    image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745',
-    concertName: 'Jazz Evening',
-    artistName: 'Jazz Ensemble',
+    image: '/YC (IMG)/GettyImages-2149383523-3.webp',
+    concertName: 'Summer Vibes',
+    artistName: 'Pop Artists',
     timeRange: '6 PM - 10:00 PM',
     locationDetails: '789 Jazz Ave, Music City, MC 12345',
-    hotelName: 'Jazz Hotel',
+    hotelName: 'Melody Hotel',
     hotelDetails: 'Boutique hotel with live music',
-  },
-  {
-    id: '4',
-    image: 'https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3',
-    concertName: 'Classical Night',
-    artistName: 'Symphony Orchestra',
-    timeRange: '8 PM - 11:00 PM',
-    locationDetails: '321 Classical Rd, Music City, MC 12345',
-    hotelName: 'Classic Hotel',
-    hotelDetails: 'Historic hotel near concert hall',
   },
 ]
 
@@ -51,13 +41,13 @@ export default function PackagesSection() {
   const navigate = useNavigate()
 
   return (
-    <section className="py-12 bg-gray-50">
+    <section className="py-20 bg-white">
       <div className="container">
-        <SectionHeading title="PACKAGES" />
+        <SectionHeading title="FEATURED PACKAGES" />
         
         <div
           ref={scrollRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {packages.map((pkg) => (
             <PackageCard

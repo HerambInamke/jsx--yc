@@ -32,8 +32,8 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Contact</h3>
             <ul className="space-y-2 text-sm text-gray-600">
               <li>Email: info@yourconcert.com</li>
-              <li>Phone: (555) 123-4567</li>
-              <li>Address: 123 Music Ave, Concert City</li>
+              <li>Phone: +91 0123456789</li>
+              <li>Address: MIT ADT</li>
             </ul>
           </div>
           
