@@ -6,6 +6,7 @@ import PackageDetail from '../pages/PackageDetail'
 import ExplorePage from '../pages/ExplorePage'
 import PackagesPage from '../pages/PackagesPage'
 import ContactPage from '../pages/ContactPage'
+import VenuePage from '../pages/VenuePage'
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ export const router = createBrowserRouter([
       { path: 'explore', element: <ExplorePage /> },
       { path: 'packages', element: <PackagesPage /> },
       { path: 'contact', element: <ContactPage /> },
+      { path: 'venue', element: <VenuePage /> },
       { path: 'artists/:id', element: <ArtistDetail /> },
       { path: 'packages/:id', element: <PackageDetail /> },
     ],

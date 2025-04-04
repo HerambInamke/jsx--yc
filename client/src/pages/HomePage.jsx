@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import HeroSection from '../components/sections/HeroSection'
 import ExploreSection from '../components/sections/ExploreSection'
 import FeaturedTextSection from '../components/sections/FeaturedTextSection'
@@ -15,7 +16,7 @@ export default function HomePage() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="relative py-20 bg-gradient-to-br from-festival-purple to-festival-purple-dark"
+        className="relative py-20 bg-gradient-to-br from-festival-primary to-festival-primary-dark"
       >
         <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
@@ -74,28 +75,28 @@ export default function HomePage() {
       <ExploreSection />
       <FeaturedTextSection />
       <BestSellerSection />
+      <PackagesSection />
       
-      {/* Venue Map Section */}
-      <section className="py-20 bg-white">
+      {/* Venue Information Button */}
+      <section className="py-20 bg-gray-50">
         <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Venue Map</h2>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Plan your festival experience with our detailed venue map
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-bold mb-6">Plan Your Visit</h2>
+            <p className="text-gray-600 mb-8">
+              Check out our venue map and seating arrangements to make the most of your concert experience.
             </p>
-          </div>
-          
-          <div className="relative rounded-lg overflow-hidden shadow-xl">
-            <img
-              src="/YC (IMG)/VSHA19_SeatingMap_ConcertEnd-jpg.webp"
-              alt="Venue Map"
-              className="w-full h-auto"
-            />
+            <Link
+              to="/venue"
+              className="inline-flex items-center px-6 py-3 bg-festival-primary text-white rounded-lg hover:bg-festival-primary-dark transition-colors"
+            >
+              View Venue Map
+              <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </Link>
           </div>
         </div>
       </section>
-      
-      <PackagesSection />
     </div>
   )
 }

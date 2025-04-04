@@ -34,7 +34,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-festival-purple/50 rounded-full hover:bg-festival-purple/70 transition-colors;
+  @apply bg-festival-primary/50 rounded-full hover:bg-festival-primary/70 transition-colors;
 }
 
 /* Card hover effects */
@@ -48,9 +48,9 @@
 }
 
 .btn-primary {
-  @apply bg-festival-purple text-white hover:bg-festival-purple-dark;
+  @apply bg-festival-primary text-white hover:bg-festival-primary-dark;
 }
 
 .btn-secondary {
-  @apply bg-white text-festival-purple border border-festival-purple hover:bg-festival-purple/10;
+  @apply bg-white text-festival-primary border border-festival-primary hover:bg-festival-primary/10;
 }

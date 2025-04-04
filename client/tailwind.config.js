@@ -10,15 +10,15 @@ export default {
     extend: {
       colors: {
         festival: {
-          purple: {
-            light: '#7407AA',
-            DEFAULT: '#510378',
+          primary: {
+            light: '#7407AA26', // 15% opacity of #7407AA
+            DEFAULT: '#510378', // 100% opacity
             dark: '#3D025A',
             darker: '#2A013F',
           },
           text: {
             light: '#F7FCFE',
-            gray: '#C5C6D0',
+            gray: '#6B7280',
           }
         },
       },
@@ -27,6 +27,7 @@ export default {
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+        'noise': "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAElBMVEUAAAD8/vz08vT09PT8/Pz///+Vc3ZvAAAABnRSTlMCAgICAgLp/qWRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIElEQVQ4jWNgQAP8/PyYwMDAQBPEP6o4qqKhpYhaTgAAE+gLdFnwgYMAAAAASUVORK5CYII=')",
       },
       keyframes: {
         'fade-in': {
