@@ -13,42 +13,44 @@
   }
 
   body {
-    @apply bg-[#fafafa] text-slate-900;
+    @apply bg-gray-50 text-slate-900 antialiased overflow-x-hidden;
   }
 }
 
 @layer components {
   .container {
-    @apply mx-auto px-4 sm:px-6 lg:px-8;
+    @apply w-full mx-auto px-4 sm:px-6 lg:px-8 max-w-[1400px];
   }
 }
 
-@layer utilities {
-  .animation-delay-200 {
-    animation-delay: 200ms;
-  }
-  
-  .animation-delay-400 {
-    animation-delay: 400ms;
-  }
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
-/* Custom scrollbar for horizontal scrolling */
-.scroll-container {
-  scrollbar-width: thin;
-  scrollbar-color: theme('colors.festival.purple.DEFAULT') theme('colors.gray.200');
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
 }
 
-.scroll-container::-webkit-scrollbar {
-  height: 6px;
+::-webkit-scrollbar-thumb {
+  @apply bg-festival-purple/50 rounded-full hover:bg-festival-purple/70 transition-colors;
 }
 
-.scroll-container::-webkit-scrollbar-track {
-  background: theme('colors.gray.200');
-  border-radius: 3px;
+/* Card hover effects */
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-lg hover:scale-[1.02];
 }
 
-.scroll-container::-webkit-scrollbar-thumb {
-  background-color: theme('colors.festival.purple.DEFAULT');
-  border-radius: 3px;
+/* Button styles */
+.btn {
+  @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-colors;
+}
+
+.btn-primary {
+  @apply bg-festival-purple text-white hover:bg-festival-purple-dark;
+}
+
+.btn-secondary {
+  @apply bg-white text-festival-purple border border-festival-purple hover:bg-festival-purple/10;
 }

@@ -10,12 +10,12 @@ const navigationDots = Array.from({ length: 4 }, (_, i) => i)
 
 export default function HeroSection() {
   return (
-    <section className="relative w-full h-[500px] bg-gradient-to-br from-festival-purple-dark to-festival-purple overflow-hidden">
+    <section className="relative w-full h-screen bg-festival-purple overflow-hidden">
       {/* Background Patterns */}
       <motion.div
         className="absolute inset-0"
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.2 }}
+        animate={{ opacity: 0.15 }}
         transition={{ duration: 1 }}
       >
         {Array.from({ length: 5 }).map((_, i) => (
@@ -40,31 +40,31 @@ export default function HeroSection() {
       </motion.div>
 
       {/* Navigation Arrows */}
-      <button className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors">
+      <button className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors hover:scale-110">
         <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
         </svg>
       </button>
-      <button className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors">
+      <button className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors hover:scale-110">
         <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
         </svg>
       </button>
 
       {/* Main Content */}
-      <div className="container mx-auto h-full flex flex-col items-center justify-center text-white relative z-10">
+      <div className="container mx-auto h-full flex flex-col items-center justify-center text-festival-text-light relative z-10">
         <motion.h1
-          className="text-6xl font-bold tracking-wider text-center"
+          className="text-7xl font-bold tracking-wider text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
           MUSIC FESTIVAL
-          <span className="block text-5xl mt-2">2024</span>
+          <span className="block text-6xl mt-2">2024</span>
         </motion.h1>
         
         <motion.div
-          className="mt-4 text-lg space-x-4"
+          className="mt-4 text-xl space-x-4 text-festival-text-gray"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -82,12 +82,12 @@ export default function HeroSection() {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.4 }}
       >
-        <div className="relative w-[200px] h-[200px]">
+        <div className="relative w-[300px] h-[300px]">
           <div className="absolute inset-0 rounded-full border-2 border-white/30 animate-[spin_20s_linear_infinite]" />
           <div className="absolute inset-2 rounded-full border-2 border-white/20 animate-[spin_15s_linear_infinite_reverse]" />
           <div className="absolute inset-4 rounded-full overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1501386761578-eac5c94b800a"
+              src="/YC (IMG)/cold.webp"
               alt="Featured Artist"
               className="w-full h-full object-cover"
             />
@@ -97,33 +97,35 @@ export default function HeroSection() {
 
       {/* Date Indicator */}
       <motion.div
-        className="absolute top-6 right-6 text-white text-right"
+        className="absolute top-8 right-8 text-festival-text-light text-right"
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6, delay: 0.6 }}
       >
-        <span className="text-3xl font-bold">20 21</span>
-        <span className="block text-lg">DEC</span>
+        <span className="text-4xl font-bold">20 21</span>
+        <span className="block text-xl text-festival-text-gray">DEC</span>
       </motion.div>
 
       {/* Navigation Dots */}
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {navigationDots.map((dot) => (
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3">
+        {navigationDots.map((dot, index) => (
           <button
             key={dot}
-            className="w-2 h-2 rounded-full bg-white/60 hover:bg-white transition-colors"
+            className={`w-3 h-3 rounded-full transition-colors ${
+              index === 0 ? 'bg-white' : 'bg-white/40 hover:bg-white/60'
+            }`}
             aria-label={`Go to slide ${dot + 1}`}
           />
         ))}
       </div>
 
       {/* Social Media Icons */}
-      <div className="absolute bottom-6 left-6 flex space-x-4">
+      <div className="absolute bottom-8 left-8 flex space-x-6">
         {socialIcons.map((icon) => (
           <a
             key={icon.name}
             href={`#${icon.name}`}
-            className="text-white/80 hover:text-white transition-colors"
+            className="text-festival-text-gray hover:text-festival-text-light transition-colors hover:scale-110 transform"
             aria-label={`Visit our ${icon.name}`}
           >
             <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">

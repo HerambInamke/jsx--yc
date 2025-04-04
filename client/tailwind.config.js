@@ -11,11 +11,15 @@ export default {
       colors: {
         festival: {
           purple: {
-            light: '#8B5CF6',
-            DEFAULT: '#7C3AED',
-            dark: '#6D28D9',
-            darker: '#2e1065',
+            light: '#7407AA',
+            DEFAULT: '#510378',
+            dark: '#3D025A',
+            darker: '#2A013F',
           },
+          text: {
+            light: '#F7FCFE',
+            gray: '#C5C6D0',
+          }
         },
       },
       fontFamily: {
@@ -40,6 +44,16 @@ export default {
       },
       transitionTimingFunction: {
         'bounce-soft': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+      },
+      container: {
+        center: true,
+        padding: {
+          DEFAULT: '1rem',
+          sm: '2rem',
+          lg: '4rem',
+          xl: '5rem',
+          '2xl': '6rem',
+        },
       },
     },
   },
