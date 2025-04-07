@@ -10,7 +10,10 @@ export default function HomePage() {
   return (
     <div className="flex flex-col">
       <HeroSection />
-      
+      <BestSellerSection />
+      <PackagesSection />
+      <ExploreSection />
+      <FeaturedTextSection />
       {/* Featured Artists Banner */}
       <motion.section
         initial={{ opacity: 0 }}
@@ -24,7 +27,7 @@ export default function HomePage() {
             backgroundImage: "url('/YC (IMG)/gradient-halftone-music-festival-twitter-header_23-2149176908.jpg')"
           }}
         />
-        
+
         <div className="container relative z-10">
           <div className="text-center text-white mb-12">
             <h2 className="text-4xl font-bold mb-4">Featured Artists</h2>
@@ -32,7 +35,7 @@ export default function HomePage() {
               Experience the magic of live performances from world-renowned artists
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
@@ -71,32 +74,6 @@ export default function HomePage() {
           </div>
         </div>
       </motion.section>
-      
-      <ExploreSection />
-      <FeaturedTextSection />
-      <BestSellerSection />
-      <PackagesSection />
-      
-      {/* Venue Information Button */}
-      <section className="py-20 bg-gray-50">
-        <div className="container">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-6">Plan Your Visit</h2>
-            <p className="text-gray-600 mb-8">
-              Check out our venue map and seating arrangements to make the most of your concert experience.
-            </p>
-            <Link
-              to="/venue"
-              className="inline-flex items-center px-6 py-3 bg-festival-primary text-white rounded-lg hover:bg-festival-primary-dark transition-colors"
-            >
-              View Venue Map
-              <svg className="w-5 h-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </section>
     </div>
   )
 }
