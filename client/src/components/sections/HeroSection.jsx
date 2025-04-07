@@ -60,9 +60,9 @@ export default function HeroSection() {
             transition={{ delay: 0.4 }}
             className="flex items-center justify-center space-x-6 text-lg text-festival-text-gray"
           >
-            <span>20-21 DECEMBER</span>
+            <span>October 18,2025</span>
             <span className="w-1.5 h-1.5 rounded-full bg-festival-primary" />
-            <span>MUMBAI, INDIA</span>
+            <span>Delhi, INDIA</span>
           </motion.div>
         </motion.div>
 
