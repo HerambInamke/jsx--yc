@@ -8,6 +8,8 @@ const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Explore', href: '/explore' },
   { name: 'Packages', href: '/packages' },
+  { name: 'Services', href: '/services' },
+  { name: 'About', href: '/about' },
   { name: 'Contact', href: '/contact' },
 ]
 
@@ -109,6 +111,15 @@ export default function Navigation() {
                   {item.name}
                 </NavLink>
               ))}
+              <div className="mt-4 pt-4 border-t border-gray-100">
+                <Link
+                  to="/terms"
+                  className="block py-2 text-sm text-gray-600 hover:text-festival-primary"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Terms & Conditions
+                </Link>
+              </div>
             </div>
           </motion.div>
         )}
