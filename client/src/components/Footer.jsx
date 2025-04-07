@@ -28,7 +28,7 @@ const item = {
 
 export default function Footer() {
   return (
-    <footer className="bg-festival-purple-darker text-white">
+    <footer className="bg-[#C2C4C1] text-black">
       <div className="container py-12 md:py-16">
         <motion.div
           variants={container}
@@ -39,7 +39,7 @@ export default function Footer() {
         >
           <motion.div variants={item}>
             <h3 className="text-xl font-bold mb-4">YOUR CONCERT</h3>
-            <p className="text-gray-300">
+            <p className="text-gray-700">
               Experience the best music festival of 2024
             </p>
           </motion.div>
@@ -51,7 +51,7 @@ export default function Footer() {
                 <li key={link}>
                   <Link
                     to={link === 'Home' ? '/' : `/${link.toLowerCase()}`}
-                    className="text-gray-300 hover:text-white transition-colors"
+                    className="text-gray-700 hover:text-black transition-colors"
                   >
                     {link}
                   </Link>
@@ -62,7 +62,7 @@ export default function Footer() {
 
           <motion.div variants={item}>
             <h3 className="text-xl font-bold mb-4">Contact</h3>
-            <ul className="space-y-2 text-gray-300">
+            <ul className="space-y-2 text-gray-700">
               <li>Email: info@yourconcert.com</li>
               <li>Phone: +91 0123456789</li>
               <li>Address: MIT ADT</li>
@@ -76,7 +76,7 @@ export default function Footer() {
                 <a
                   key={platform.name}
                   href={platform.href}
-                  className="text-gray-300 hover:text-white transition-colors"
+                  className="text-gray-700 hover:text-black transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -92,7 +92,7 @@ export default function Footer() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="mt-12 pt-8 border-t border-white/10 text-center text-gray-300"
+          className="mt-12 pt-8 border-t border-[#6F7675] text-center text-gray-700"
         >
           <p>© {new Date().getFullYear()} YOUR CONCERT. All rights reserved.</p>
         </motion.div>

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import HeroSection from '../components/sections/HeroSection'
 import ExploreSection from '../components/sections/ExploreSection'
 import FeaturedTextSection from '../components/sections/FeaturedTextSection'
@@ -7,6 +7,12 @@ import BestSellerSection from '../components/sections/BestSellerSection'
 import PackagesSection from '../components/sections/PackagesSection'
 
 export default function HomePage() {
+  const navigate = useNavigate()
+
+  const handleFeaturedArtistClick = (id) => {
+    navigate(`/concert-details/${id}`)
+  }
+
   return (
     <div className="flex flex-col">
       <HeroSection />
@@ -14,7 +20,7 @@ export default function HomePage() {
       <PackagesSection />
       <ExploreSection />
       <FeaturedTextSection />
-      {/* Featured Artists Banner */}
+      
       <motion.section
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -39,16 +45,19 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
+                id: '1',
                 name: 'Main Stage',
                 image: '/YC (IMG)/cold.webp',
                 description: 'Headline performances',
               },
               {
+                id: '2',
                 name: 'Electronic Arena',
                 image: '/YC (IMG)/593532f2da6dde2b77402dcc.webp',
                 description: 'EDM and electronic music',
               },
               {
+                id: '3',
                 name: 'Acoustic Garden',
                 image: '/YC (IMG)/GettyImages-2149383523-3.webp',
                 description: 'Intimate acoustic sessions',
@@ -57,7 +66,8 @@ export default function HomePage() {
               <motion.div
                 key={stage.name}
                 whileHover={{ scale: 1.05 }}
-                className="relative rounded-lg overflow-hidden aspect-[4/3]"
+                className="relative rounded-lg overflow-hidden aspect-[4/3] cursor-pointer"
+                onClick={() => handleFeaturedArtistClick(stage.id)}
               >
                 <img
                   src={stage.image}

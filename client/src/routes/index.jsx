@@ -7,6 +7,7 @@ import ExplorePage from '../pages/ExplorePage'
 import PackagesPage from '../pages/PackagesPage'
 import ContactPage from '../pages/ContactPage'
 import VenuePage from '../pages/VenuePage'
+import ConcertDetails from '../pages/ConcertDetails'
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ export const router = createBrowserRouter([
       { path: 'venue', element: <VenuePage /> },
       { path: 'artists/:id', element: <ArtistDetail /> },
       { path: 'packages/:id', element: <PackageDetail /> },
+      { path: 'concert-details/:id', element: <ConcertDetails /> },
     ],
   },
 ])

@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import SectionHeading from '../common/SectionHeading'
 import ArtistCard from '../common/ArtistCard'
 
@@ -28,6 +29,11 @@ const artists = [
 
 export default function BestSellerSection() {
   const scrollRef = useRef(null)
+  const navigate = useNavigate()
+
+  const handleCardClick = (id) => {
+    navigate(`/concert-details/${id}`)
+  }
 
   return (
     <section className="py-12">
@@ -41,7 +47,8 @@ export default function BestSellerSection() {
           {artists.map((artist) => (
             <div
               key={artist.id}
-              className="min-w-[300px] sm:min-w-[350px] snap-start"
+              className="min-w-[300px] sm:min-w-[350px] snap-start cursor-pointer"
+              onClick={() => handleCardClick(artist.id)}
             >
               <ArtistCard {...artist} onFavoriteToggle={() => {}} />
             </div>
