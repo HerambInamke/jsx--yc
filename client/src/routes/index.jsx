@@ -12,6 +12,7 @@ import HotelDetails from '../pages/HotelDetails'
 import AboutPage from '../pages/AboutPage'
 import ServicesPage from '../pages/ServicesPage'
 import TermsPage from '../pages/TermsPage'
+import TicketPage from '../pages/TicketPage'
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ export const router = createBrowserRouter([
       { path: 'artists/:id', element: <ArtistDetail /> },
       { path: 'packages/:id', element: <PackageDetail /> },
       { path: 'concert-details/:id', element: <ConcertDetails /> },
+      { path: 'concert-details/:id/tickets', element: <TicketPage /> },
       { path: 'hotels', element: <HotelDetails /> },
       { path: 'about', element: <AboutPage /> },
       { path: 'services', element: <ServicesPage /> },

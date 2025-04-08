@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { FaHeart, FaShare, FaMapMarkerAlt, FaClock } from 'react-icons/fa'
 import { format } from 'date-fns'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const concertData = [
   {
@@ -35,6 +36,8 @@ const concertData = [
 ]
 
 export default function ConcertDetails() {
+  const { id } = useParams()
+  const navigate = useNavigate()
   const [selectedCity, setSelectedCity] = useState('')
   const [selectedDate, setSelectedDate] = useState('')
   const [selectedVenue, setSelectedVenue] = useState('')
@@ -209,7 +212,10 @@ export default function ConcertDetails() {
                       View Venue Map
                     </button>
 
-                    <button className="ml-auto bg-festival-primary text-white px-6 py-2 rounded-lg hover:bg-festival-primary-dark transition-colors">
+                    <button 
+                      onClick={() => navigate(`/concert-details/${concert.id}/tickets`)}
+                      className="ml-auto bg-festival-primary text-white px-6 py-2 rounded-lg hover:bg-festival-primary-dark transition-colors"
+                    >
                       Book Tickets
                     </button>
                   </div>
