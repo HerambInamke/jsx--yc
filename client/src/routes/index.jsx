@@ -13,6 +13,8 @@ import AboutPage from '../pages/AboutPage'
 import ServicesPage from '../pages/ServicesPage'
 import TermsPage from '../pages/TermsPage'
 import TicketPage from '../pages/TicketPage'
+import LoginPage from '../pages/Auth/LoginPage'
+import SignupPage from '../pages/Auth/SignupPage'
 
 export const router = createBrowserRouter([
   {
@@ -34,4 +36,6 @@ export const router = createBrowserRouter([
       { path: 'terms', element: <TermsPage /> },
     ],
   },
+  { path: '/login', element: <LoginPage /> },
+  { path: '/signup', element: <SignupPage /> },
 ])
