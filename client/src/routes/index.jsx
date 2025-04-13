@@ -13,6 +13,7 @@ import AboutPage from '../pages/AboutPage'
 import ServicesPage from '../pages/ServicesPage'
 import TermsPage from '../pages/TermsPage'
 import TicketPage from '../pages/TicketPage'
+import CartPage from '../pages/CartPage'
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +33,7 @@ export const router = createBrowserRouter([
       { path: 'about', element: <AboutPage /> },
       { path: 'services', element: <ServicesPage /> },
       { path: 'terms', element: <TermsPage /> },
+      { path: 'cart', element: < CartPage/> },
     ],
   },
 ])
