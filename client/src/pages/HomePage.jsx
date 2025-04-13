@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
-import HeroSection from '../components/sections/HeroSection'
 import ExploreSection from '../components/sections/ExploreSection'
 import BestSellerSection from '../components/sections/BestSellerSection'
 import PackagesSection from '../components/sections/PackagesSection'
@@ -21,7 +20,55 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col">
-      <HeroSection />
+      {/* Hero Section */}
+      <section className="relative bg-cover bg-center py-32 md:py-48 text-white" style={{ backgroundImage: "url('/client/public/Backgrounds/coldpay_bg.png')" }}>
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="container relative z-10">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-4xl md:text-6xl font-bold text-center mb-4"
+          >
+            Your Ultimate Concert Experience
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-lg md:text-xl text-center mb-8 max-w-2xl mx-auto"
+          >
+            Discover exclusive concerts, personalized packages, and unforgettable moments.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex justify-center gap-4"
+          >
+            <button
+              onClick={() => navigate('/explore')}
+              className="px-6 py-3 bg-festival-secondary text-white rounded-lg hover:bg-festival-secondary-dark transition-colors"
+            >
+              Explore Events
+            </button>
+            <button
+              onClick={() => navigate('/packages')}
+              className="px-6 py-3 bg-white text-festival-primary rounded-lg hover:bg-gray-100 transition-colors"
+            >
+              View Packages
+            </button>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.6 }}
+            className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-sm text-white/70"
+          >
+            Scroll down to explore more
+          </motion.div>
+        </div>
+      </section>
 
       {/* Featured Events */}
       <motion.section
@@ -51,24 +98,24 @@ export default function HomePage() {
             {[
               {
                 title: 'Rock Festival',
-                date: 'March 15, 2024',
+                date: 'October 26, 2024',
                 image: '/YC (IMG)/cold.webp',
                 category: 'Rock',
               },
               {
                 title: 'Electronic Night',
-                date: 'April 2, 2024',
+                date: 'November 9, 2024',
                 image: '/YC (IMG)/593532f2da6dde2b77402dcc.webp',
                 category: 'Electronic',
               },
               {
                 title: 'Jazz Evening',
-                date: 'April 10, 2024',
+                date: 'November 23, 2024',
                 image: '/YC (IMG)/GettyImages-2149383523-3.webp',
                 category: 'Jazz',
               },
             ].map((event, index) => (
-              <motion.div
+              <motion.a
                 key={event.title}
                 variants={fadeInUp}
                 transition={{ delay: index * 0.1 }}
@@ -90,7 +137,7 @@ export default function HomePage() {
                     <p className="text-white/80">{event.date}</p>
                   </div>
                 </div>
-              </motion.div>
+              </motion.a>
             ))}
           </div>
         </div>
@@ -105,7 +152,7 @@ export default function HomePage() {
         initial="initial"
         whileInView="whileInView"
         viewport={{ once: true }}
-        className="py-20 bg-festival-primary/5"
+        className="py-20 bg-gray-50"
       >
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
@@ -117,13 +164,13 @@ export default function HomePage() {
             </motion.h2>
             <motion.p
               variants={fadeInUp}
-              className="text-gray-600 mb-8"
+              className="text-gray-500 mb-8"
             >
               Subscribe to our newsletter for exclusive updates, early access to tickets, and special offers
             </motion.p>
             <motion.form
               variants={fadeInUp}
-              className="flex flex-col sm:flex-row gap-4 max-w-xl mx-auto"
+              className="flex flex-col sm:flex-row gap-2 max-w-xl mx-auto"
               onSubmit={(e) => e.preventDefault()}
             >
               <input
@@ -134,7 +181,7 @@ export default function HomePage() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-8 py-3 bg-festival-primary text-white rounded-lg hover:bg-festival-primary-dark transition-colors"
+                className="px-6 py-2 bg-festival-secondary text-white rounded-lg hover:bg-festival-secondary-dark transition-colors"
               >
                 Subscribe
               </motion.button>
@@ -151,27 +198,27 @@ export default function HomePage() {
         initial="initial"
         whileInView="whileInView"
         viewport={{ once: true }}
-        className="py-20 bg-gradient-to-r from-festival-primary to-festival-primary-dark text-white"
+        className="py-24 bg-gray-100 rounded-3xl"
       >
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
             <motion.h2
               variants={fadeInUp}
-              className="text-3xl font-bold mb-4"
+              className="text-3xl md:text-4xl font-bold text-gray-800 mb-4"
             >
-              Ready to Experience Live Music?
+              Ready for the Show?
             </motion.h2>
             <motion.p
               variants={fadeInUp}
-              className="text-white/80 mb-8"
+              className="text-gray-600 text-lg mb-8"
             >
-              Join thousands of music lovers and book your tickets today
+              Explore upcoming events and book your tickets for an unforgettable experience.
             </motion.p>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => navigate('/explore')}
-              className="px-8 py-3 bg-white text-festival-primary rounded-lg hover:bg-gray-100 transition-colors"
+              className="px-8 py-3 bg-festival-secondary text-white rounded-lg hover:bg-festival-secondary-dark transition-colors"
             >
               Explore Events
             </motion.button>
