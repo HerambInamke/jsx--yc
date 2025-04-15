@@ -13,8 +13,11 @@ import AboutPage from '../pages/AboutPage'
 import ServicesPage from '../pages/ServicesPage'
 import TermsPage from '../pages/TermsPage'
 import TicketPage from '../pages/TicketPage'
-import LoginPage from '../pages/Auth/LoginPage'
-import SignupPage from '../pages/Auth/SignupPage'
+import CartPage from '../pages/CartPage'
+import PreCartPage from "../pages/PreCartPage"
+import LoginPage from "../pages/Auth/LoginPage"
+import SignupPage from "../pages/Auth/SignupPage"
+import HotelRoom from "../pages/HotelRoom"
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +37,9 @@ export const router = createBrowserRouter([
       { path: 'about', element: <AboutPage /> },
       { path: 'services', element: <ServicesPage /> },
       { path: 'terms', element: <TermsPage /> },
+      { path: 'cart', element: < CartPage/> },
+      { path: 'precart', element: < PreCartPage/> },
+      { path: 'rooms', element: < HotelRoom/> },
     ],
   },
   { path: '/login', element: <LoginPage /> },
