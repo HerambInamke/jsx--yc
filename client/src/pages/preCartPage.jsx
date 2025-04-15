@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useTimer } from "react-timer-hook";
 import { Box, Modal, Button, Typography } from "@mui/material";
 
-const CartPage = () => {
+const PreCartPage = () => {
     // Set the timer to 10 minutes from now
     const time = new Date();
     time.setMinutes(time.getMinutes() + 10);
@@ -128,21 +129,20 @@ const CartPage = () => {
 
                 {/* Right Section */}
                 <div className="space-y-6 p-4 rounded-lg bg-[#e3e3e3cb] shadow-md">
-                    {/* Timer */}
+                    {/* warning */}
                     <div className="bg-white p-6 rounded-xl shadow text-center">
-                        <div className="text-4xl font-bold tracking-widest">
-                            {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
-                        </div>
-                        <p className="mt-4 text-sm text-gray-500">
-                            {isRunning ? "Time left to complete booking" : "Time expired"}
+                        <p class="text-sm text-red-600 font-medium">
+                            The tickets and hotel room you've added to your cart are not reserved yet. To secure your booking, please click <strong>Confirm & Pay</strong> within the next 10 minutes. A timer will start once you proceed.
                         </p>
                     </div>
 
                     {/* Continue Button & Booking Summary */}
                     <div className="bg-white p-6 rounded-xl shadow flex flex-col items-center">
-                        <button className="w-full bg-gradient-to-r bg-purple-600 text-white py-2 rounded-lg font-semibold hover:bg-purple-900 transition">
-                            CONTINUE
-                        </button>
+                        <Link to="/cart" className="w-full">
+                            <button className="w-full bg-gradient-to-r bg-purple-600 text-white py-2 rounded-lg font-semibold hover:bg-purple-900 transition">
+                                CONFIRM
+                            </button>
+                        </Link>
 
                         <div className="w-full h-fit mt-4 bg-gray-100 rounded p-4 text-sm text-gray-700 space-y-2">
                             <div className="flex justify-between">
@@ -192,4 +192,4 @@ const CartPage = () => {
     );
 };
 
-export default CartPage;
+export default PreCartPage;
