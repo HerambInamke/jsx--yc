@@ -1,5 +1,3 @@
-import { fontFamily } from 'tailwindcss/defaultTheme'
-
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -11,10 +9,15 @@ export default {
       colors: {
         festival: {
           primary: {
-            light: '#7407AA26', // 15% opacity of #7407AA
-            DEFAULT: '#510378', // 100% opacity
+            light: '#8A2BE2',
+            DEFAULT: '#510378',
             dark: '#3D025A',
             darker: '#2A013F',
+          },
+          secondary: {
+            light: '#FF69B4',
+            DEFAULT: '#FF1493',
+            dark: '#C71585',
           },
           text: {
             light: '#F7FCFE',
@@ -23,28 +26,12 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter var', ...fontFamily.sans],
-      },
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'noise': "url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyBAMAAADsEZWCAAAAElBMVEUAAAD8/vz08vT09PT8/Pz///+Vc3ZvAAAABnRSTlMCAgICAgLp/qWRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIElEQVQ4jWNgQAP8/PyYwMDAQBPEP6o4qqKhpYhaTgAAE+gLdFnwgYMAAAAASUVORK5CYII=')",
-      },
-      keyframes: {
-        'fade-in': {
-          '0%': { opacity: '0', transform: 'translateY(10px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        'float': {
-          '0%, 100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-10px)' },
-        },
+        sans: ['Inter var', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fade-in 0.6s ease-out forwards',
         'float': 'float 3s ease-in-out infinite',
-      },
-      transitionTimingFunction: {
-        'bounce-soft': 'cubic-bezier(0.34, 1.56, 0.64, 1)',
+        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       container: {
         center: true,
@@ -55,8 +42,18 @@ export default {
           xl: '5rem',
           '2xl': '6rem',
         },
+        screens: {
+          sm: '640px',
+          md: '768px',
+          lg: '1024px',
+          xl: '1280px',
+          '2xl': '1536px',
+        },
       },
     },
   },
-  plugins: [],
+  plugins: [
+    // require('@tailwindcss/forms'),
+    // require('@tailwindcss/typography'),
+  ],
 }
