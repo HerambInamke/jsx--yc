@@ -14,7 +14,7 @@ import ServicesPage from '../pages/ServicesPage'
 import TermsPage from '../pages/TermsPage'
 import TicketPage from '../pages/TicketPage'
 import CartPage from '../pages/CartPage'
-// import PreCartPage from "../pages/PreCartPage"
+import PreCartPage from "../pages/preCartPage"
 import LoginPage from "../pages/Auth/LoginPage"
 import SignupPage from "../pages/Auth/SignupPage"
 import HotelRoom from "../pages/HotelRoom"
