@@ -19,6 +19,7 @@ import LoginPage from "../pages/Auth/LoginPage"
 import SignupPage from "../pages/Auth/SignupPage"
 import HotelRoom from "../pages/HotelRoom"
 import PaymentPage from '../pages/PaymentPage'
+import ProfilePage from '../pages/ProfilePage'
 
 export const router = createBrowserRouter([
   {
@@ -42,6 +43,7 @@ export const router = createBrowserRouter([
       { path: 'cart', element: <CartPage /> },
       { path: 'precart', element: <PreCartPage /> },
       { path: 'payment', element: <PaymentPage /> },
+      { path: 'profile', element: <ProfilePage /> },
     ],
   },
   { path: '/login', element: <LoginPage /> },
