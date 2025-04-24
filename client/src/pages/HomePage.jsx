@@ -65,7 +65,7 @@ export default function HomePage() {
             transition={{ duration: 1, delay: 0.6 }}
             className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-sm text-white/70"
           >
-            Scroll down to explore more
+           
           </motion.div>
         </div>
       </section>
