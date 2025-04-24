@@ -146,50 +146,44 @@ export default function HomePage() {
       <BestSellerSection />
       <PackagesSection />
 
-      {/* Newsletter Section */}
-      <motion.section
-        variants={fadeInUp}
-        initial="initial"
-        whileInView="whileInView"
-        viewport={{ once: true }}
-        className="py-20 bg-gray-50"
-      >
-        <div className="container">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.h2
-              variants={fadeInUp}
-              className="text-3xl font-bold mb-4"
-            >
+      <section className="py-20 bg-black relative overflow-hidden">
+        <div className="container relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-3xl mx-auto text-center"
+          >
+            <h2 className="text-4xl font-bold text-white mb-6">
               Stay Updated
-            </motion.h2>
-            <motion.p
-              variants={fadeInUp}
-              className="text-gray-500 mb-8"
-            >
-              Subscribe to our newsletter for exclusive updates, early access to tickets, and special offers
-            </motion.p>
+            </h2>
+            <p className="text-gray-400 mb-8">
+              Subscribe to our newsletter for exclusive updates and early access to tickets
+            </p>
             <motion.form
-              variants={fadeInUp}
-              className="flex flex-col sm:flex-row gap-2 max-w-xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="flex flex-col sm:flex-row gap-4"
               onSubmit={(e) => e.preventDefault()}
             >
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-6 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-festival-primary focus:border-transparent"
+                className="flex-1 px-6 py-4 rounded-full bg-white/10 text-white border border-white/20 focus:outline-none focus:border-festival-secondary"
               />
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-6 py-2 bg-festival-secondary text-white rounded-lg hover:bg-festival-secondary-dark transition-colors"
+                className="px-8 py-4 bg-festival-secondary text-white rounded-full font-medium hover:bg-festival-secondary-dark transition-colors"
               >
                 Subscribe
               </motion.button>
             </motion.form>
-          </div>
+          </motion.div>
         </div>
-      </motion.section>
-
+        <div className="absolute inset-0 bg-gradient-to-b from-festival-primary-dark/20 to-transparent" />
+      </section>
       <ExploreSection />
 
       {/* Call to Action */}
@@ -200,6 +194,7 @@ export default function HomePage() {
         viewport={{ once: true }}
         className="py-24 bg-gray-100 rounded-3xl"
       >
+        
         <div className="container">
           <div className="max-w-4xl mx-auto text-center">
             <motion.h2
