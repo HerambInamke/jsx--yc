@@ -1,5 +1,4 @@
-const fs = require('fs');
-const https = require('https');
+const http = require('http');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -13,7 +12,12 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 
-// Routes
+// Hello route
+app.get('/', (req, res) => {
+  res.send('Hello from the backend');
+});
+
+// API Routes
 app.use('/api/auth', require('./routes/auth.routes'));
 app.use('/api/events', require('./routes/event.routes'));
 app.use('/api/bookings', require('./routes/booking.routes'));
@@ -38,6 +42,6 @@ app.use((err, req, res, next) => {
 
 const PORT = process.env.PORT || 5000;
 
-https.createServer(app).listen(PORT, () => {
-  console.log(`✅Secure Server running at https://localhost:${PORT}`);
+http.createServer(app).listen(PORT, () => {
+  console.log(`✅Server running at http://localhost:${PORT}`);
 });
