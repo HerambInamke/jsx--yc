@@ -17,5 +17,20 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
+let app;
+let auth;
+let googleProvider;
+
+// Only initialize Firebase on the client side
+if (typeof window !== 'undefined') {
+  app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  googleProvider = new GoogleAuthProvider();
+  
+  // Configure popup settings
+  googleProvider.setCustomParameters({
+    prompt: 'select_account'
+  });
+}
+
+export { app, auth, googleProvider };
