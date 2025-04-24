@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { FaChevronDown, FaFilter, FaMapMarkerAlt, FaClock, FaCalendarAlt } from 'react-icons/fa'
 
-// Import concert data from ConcertDetails to keep it consistent
 const concertData = [
   {
     id: 1,
@@ -35,7 +34,6 @@ const concertData = [
   }
 ]
 
-// Dummy ticket data for different zones
 const ticketData = [
   { id: 1, section: 'Section 1', row: 'A', price: 'INR 3000', available: true },
   { id: 2, section: 'Section 2', row: 'B', price: 'INR 3100', available: true },
@@ -56,15 +54,17 @@ export default function TicketPage() {
   const [selectedTicket, setSelectedTicket] = useState(null)
   
   useEffect(() => {
-    // Find the concert from the data based on the ID
     const foundConcert = concertData.find(c => c.id === parseInt(id))
     if (foundConcert) {
       setConcert(foundConcert)
     } else {
-      // If concert not found, navigate back to concerts page
       navigate('/explore')
     }
   }, [id, navigate])
+
+  const handleSelectTicket = () => {
+    navigate('/precart');
+  };
 
   if (!concert) {
     return (
@@ -77,7 +77,6 @@ export default function TicketPage() {
     )
   }
 
-  // Format the date
   const eventDate = new Date(concert.date)
   const formattedDate = eventDate.toLocaleDateString('en-US', {
     weekday: 'long',
@@ -280,6 +279,7 @@ export default function TicketPage() {
                   </div>
                   <div className="mt-6 flex justify-end">
                     <button 
+                      onClick={handleSelectTicket}
                       className="bg-festival-primary text-white px-8 py-3 rounded-full hover:bg-opacity-90 transition-colors font-semibold shadow-md hover:shadow-lg"
                     >
                       SELECT TICKETS

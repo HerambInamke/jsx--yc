@@ -18,6 +18,7 @@ import PreCartPage from "../pages/preCartPage"
 import LoginPage from "../pages/Auth/LoginPage"
 import SignupPage from "../pages/Auth/SignupPage"
 import HotelRoom from "../pages/HotelRoom"
+import PaymentPage from '../pages/PaymentPage'
 
 export const router = createBrowserRouter([
   {
@@ -34,12 +35,13 @@ export const router = createBrowserRouter([
       { path: 'concert-details/:id', element: <ConcertDetails /> },
       { path: 'concert-details/:id/tickets', element: <TicketPage /> },
       { path: 'hotels', element: <HotelDetails /> },
+      { path: 'hotel-rooms', element: <HotelRoom /> },
       { path: 'about', element: <AboutPage /> },
       { path: 'services', element: <ServicesPage /> },
       { path: 'terms', element: <TermsPage /> },
-      { path: 'cart', element: < CartPage/> },
-      { path: 'precart', element: < PreCartPage/> },
-      { path: 'rooms', element: < HotelRoom/> },
+      { path: 'cart', element: <CartPage /> },
+      { path: 'precart', element: <PreCartPage /> },
+      { path: 'payment', element: <PaymentPage /> },
     ],
   },
   { path: '/login', element: <LoginPage /> },
