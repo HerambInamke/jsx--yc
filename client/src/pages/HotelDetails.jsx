@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import Select from '@mui/material/Select'
+import { useNavigate } from 'react-router-dom'
 import hotelData from '../StaticData/hotelData'
 
 const pageTransition = {
@@ -15,6 +16,7 @@ const pageTransition = {
 }
 
 const HotelDetails = () => {
+  const navigate = useNavigate()
   const [filters, setFilters] = useState({
     radius: '',
     rating: '',
@@ -42,6 +44,10 @@ const HotelDetails = () => {
   const handleLike = () => {
     setLiked(prev => !prev)
     setLikeCount(prev => liked ? prev - 1 : prev + 1)
+  }
+
+  const handleViewDetails = () => {
+    navigate('/hotel-rooms')
   }
 
   return (
@@ -189,6 +195,7 @@ const HotelDetails = () => {
                       <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
+                        onClick={handleViewDetails}
                         className="px-6 py-2 bg-festival-primary text-white rounded-lg hover:bg-festival-primary-dark transition-colors"
                       >
                         View Details
