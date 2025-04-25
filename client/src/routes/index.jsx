@@ -20,6 +20,7 @@ import SignupPage from "../pages/Auth/SignupPage"
 import HotelRoom from "../pages/HotelRoom"
 import PaymentPage from '../pages/PaymentPage'
 import ProfilePage from '../pages/ProfilePage'
+import ProtectedRoute from '../components/ProtectedRoute'
 
 export const router = createBrowserRouter([
   {
@@ -40,10 +41,22 @@ export const router = createBrowserRouter([
       { path: 'about', element: <AboutPage /> },
       { path: 'services', element: <ServicesPage /> },
       { path: 'terms', element: <TermsPage /> },
-      { path: 'cart', element: <CartPage /> },
-      { path: 'precart', element: <PreCartPage /> },
-      { path: 'payment', element: <PaymentPage /> },
-      { path: 'profile', element: <ProfilePage /> },
+      { 
+        path: 'cart', 
+        element: <ProtectedRoute><CartPage /></ProtectedRoute> 
+      },
+      { 
+        path: 'precart', 
+        element: <ProtectedRoute><PreCartPage /></ProtectedRoute> 
+      },
+      { 
+        path: 'payment', 
+        element: <ProtectedRoute><PaymentPage /></ProtectedRoute> 
+      },
+      { 
+        path: 'profile', 
+        element: <ProtectedRoute><ProfilePage /></ProtectedRoute> 
+      },
     ],
   },
   { path: '/login', element: <LoginPage /> },

@@ -1,8 +1,11 @@
 import { useState, useEffect, useCallback } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Bars3Icon, XMarkIcon, ShoppingCartIcon, UserCircleIcon } from '@heroicons/react/24/outline'
 import { cn } from '../lib/utils'
+import { useAuth } from '../contexts/AuthContext'
+import { signOut } from 'firebase/auth'
+import { auth } from '../firebase'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -22,7 +25,10 @@ const socialLinks = [
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false)
   const location = useLocation()
+  const navigate = useNavigate()
+  const { currentUser, isAuthenticated } = useAuth()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,6 +41,19 @@ export default function Navigation() {
   const toggleMenu = useCallback(() => {
     setIsOpen(prev => !prev)
   }, [])
+
+  const toggleProfileMenu = useCallback(() => {
+    setIsProfileMenuOpen(prev => !prev)
+  }, [])
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth)
+      navigate('/')
+    } catch (error) {
+      console.error('Error signing out:', error)
+    }
+  }
 
   return (
     <motion.header
@@ -70,19 +89,53 @@ export default function Navigation() {
                 {item.name}
               </NavLink>
             ))}
-            <Link to="/profile" className="p-2 text-gray-600 hover:text-festival-primary transition-colors">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                aria-hidden="true"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={1.5}
-                stroke="currentColor"
+            
+            {isAuthenticated ? (
+              <>
+                <Link to="/cart" className="p-2 text-gray-600 hover:text-festival-primary transition-colors">
+                  <ShoppingCartIcon className="h-6 w-6" />
+                </Link>
+                <div className="relative">
+                  <button
+                    onClick={toggleProfileMenu}
+                    className="p-2 text-gray-600 hover:text-festival-primary transition-colors flex items-center"
+                  >
+                    <UserCircleIcon className="h-6 w-6 mr-1" />
+                    <span className="text-sm truncate max-w-[100px]">
+                      {currentUser?.displayName || currentUser?.email?.split('@')[0] || 'Profile'}
+                    </span>
+                  </button>
+                  
+                  {isProfileMenuOpen && (
+                    <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                      <Link
+                        to="/profile"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        onClick={() => setIsProfileMenuOpen(false)}
+                      >
+                        Your Profile
+                      </Link>
+                      <button
+                        onClick={() => {
+                          handleLogout();
+                          setIsProfileMenuOpen(false);
+                        }}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      >
+                        Sign out
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </>
+            ) : (
+              <Link
+                to="/login"
+                className="px-4 py-2 rounded-md bg-festival-primary text-white hover:bg-festival-secondary transition-colors"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-            </Link>
+                Sign In
+              </Link>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -132,20 +185,51 @@ export default function Navigation() {
                 >
                   Terms & Conditions
                 </Link>
-                <Link
-                  to="/profile"
-                  className="block py-2 text-sm text-gray-600 hover:text-festival-primary"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Profile
-                </Link>
-                <Link
-                  to="/login"
-                  className="block py-2 text-sm text-gray-600 hover:text-festival-primary"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Login
-                </Link>
+                
+                {isAuthenticated ? (
+                  <>
+                    <Link
+                      to="/profile"
+                      className="block py-2 text-sm text-gray-600 hover:text-festival-primary"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Profile
+                    </Link>
+                    <Link
+                      to="/cart"
+                      className="block py-2 text-sm text-gray-600 hover:text-festival-primary"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Cart
+                    </Link>
+                    <button
+                      onClick={() => {
+                        handleLogout();
+                        setIsOpen(false);
+                      }}
+                      className="block w-full text-left py-2 text-sm text-gray-600 hover:text-festival-primary"
+                    >
+                      Sign out
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      to="/login"
+                      className="block py-2 text-sm text-gray-600 hover:text-festival-primary"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Sign In
+                    </Link>
+                    <Link
+                      to="/signup"
+                      className="block py-2 text-sm text-gray-600 hover:text-festival-primary"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      Sign Up
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </motion.div>
