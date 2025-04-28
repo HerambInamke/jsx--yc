@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
       },
       { 
         path: 'precart', 
-        element: <ProtectedRoute><PreCartPage /></ProtectedRoute> 
+        element: <PreCartPage />
       },
       { 
         path: 'payment', 

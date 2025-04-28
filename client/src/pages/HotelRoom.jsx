@@ -2,6 +2,7 @@ import React from "react";
 import { Carousel } from 'react-responsive-carousel';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import CloseIcon from '@mui/icons-material/Close';
+import {useNavigate} from "react-router-dom";
 
 import { Button, Rating } from "@mui/material";
 import { AnimatePresence, motion } from 'framer-motion';
@@ -12,6 +13,8 @@ const HotelRoom = () => {
     // Lifted state for the selected room
     const [selectedRoom, setSelectedRoom] = React.useState(null);
     const [isMapOpen, setIsMapOpen] = React.useState(false);
+
+    const navigate = useNavigate();
 
     // Ref for the modal
     const modalRef = React.useRef();
@@ -158,6 +161,7 @@ const HotelRoom = () => {
                                 backgroundColor: '#510378',
                                 '&:hover': { backgroundColor: '#3a025a' }
                             }}
+                            onClick={() => navigate("/precart")}
                         >
                             Add to Cart
                         </Button>
