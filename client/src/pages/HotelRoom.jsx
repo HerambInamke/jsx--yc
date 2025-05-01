@@ -41,30 +41,34 @@ const HotelRoom = () => {
             location: "Goa, India",
             img: ["/HotelImages/image_5.png", "/HotelImages/image_5.1.png", "/HotelImages/image_5.2.png", "/HotelImages/image_5.3.png"],
             rating: 4,
-            price: 6500
+            price: 6500,
+            amenities: ["Wi-Fi", "Sea View", "Air Conditioning", "Private Balcony", "Breakfast Included"]
         },
         {
             name: "Mountain Retreat",
             location: "Manali, India",
             img: ["/HotelImages/image_6.png", "/HotelImages/image_6.1.png", "/HotelImages/image_6.2.png", "/HotelImages/image_6.3.png"],
             rating: 4.7,
-            price: 7200
+            price: 7200,
+            amenities: ["Heater", "Mountain View", "Free Parking", "Hot Tub", "Room Service"]
         },
         {
             name: "City Lights Studio",
             location: "Mumbai, India",
             img: ["/HotelImages/image_7.png", "/HotelImages/image_7.1.png", "/HotelImages/image_7.2.png", "/HotelImages/image_7.3.png"],
             rating: 4.3,
-            price: 5800
+            price: 5800,
+            amenities: ["Wi-Fi", "City View", "Mini Bar", "Smart TV", "Gym Access"]
         },
         {
             name: "Desert Villa",
             location: "Jaisalmer, India",
             img: ["/HotelImages/image_8.png", "/HotelImages/image_8.1.png", "/HotelImages/image_8.2.png"],
             rating: 3.7,
-            price: 6000
+            price: 6000,
+            amenities: ["Desert Safari", "Cultural Shows", "Free Breakfast", "Air Conditioning", "Private Courtyard"]
         }
-    ];
+    ];    
 
     // Initialize selected room on mount
     React.useEffect(() => {
@@ -146,9 +150,9 @@ const HotelRoom = () => {
                             <span className="text-sm font-medium">{selectedRoom.rating}</span>
                         </div>
                         <ul className="text-sm list-disc ml-4 space-y-1">
-                            <li>Book with ₹0 Payment</li>
-                            <li>No meals included</li>
-                            <li className="text-green-600">Free Cancellation till 24 hrs before check in</li>
+                            {selectedRoom.amenities.map((amenitie) => 
+                                <li>{amenitie}</li>
+                            )}
                         </ul>
                     </div>
                     <div className="mt-6">
