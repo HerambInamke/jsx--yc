@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const morgan = require('morgan');
 require('dotenv').config();
+const errorHandler = require('./middleware/error');
 
 const app = express();
 
@@ -18,9 +19,11 @@ app.get('/', (req, res) => {
 });
 
 // API Routes
-app.use('/api/auth', require('./routes/auth.routes'));
-app.use('/api/events', require('./routes/event.routes'));
-app.use('/api/bookings', require('./routes/booking.routes'));
+app.use('/api/v1/auth', require('./routes/auth.routes'));
+app.use('/api/v1/concerts', require('./routes/event.routes'));
+app.use('/api/v1/bookings', require('./routes/booking.routes'));
+app.use('/api/v1/hotels', require('./routes/hotel.routes'));
+app.use('/api/v1/packages', require('./routes/package.routes'));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI, {
@@ -31,16 +34,9 @@ mongoose.connect(process.env.MONGODB_URI, {
 .catch(err => console.error('❌MongoDB Connection Error:', err));
 
 // Error Handler
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).json({
-    success: false,
-    message: 'Something went wrong!',
-    error: process.env.NODE_ENV === 'development' ? err.message : {}
-  });
-});
+app.use(errorHandler);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 http.createServer(app).listen(PORT, () => {
   console.log(`✅Server running at http://localhost:${PORT}`);

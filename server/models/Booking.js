@@ -9,7 +9,10 @@ const bookingSchema = new mongoose.Schema({
   event: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Event',
-    required: [true, 'Booking must belong to an event']
+  },
+  package: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Package',
   },
   tickets: [{
     ticketType: {
@@ -56,7 +59,8 @@ const bookingSchema = new mongoose.Schema({
   bookingDate: {
     type: Date,
     default: Date.now
-  }
+  },
+  specialRequests: String
 }, {
   timestamps: true
 });

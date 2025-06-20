@@ -34,7 +34,20 @@ const userSchema = new mongoose.Schema({
       },
       message: props => `${props.value} is not a valid phone number!`
     }
-  }
+  },
+  profilePicture: {
+    type: String,
+    default: 'default.jpg'
+  },
+  addresses: [
+    {
+      street: String,
+      city: String,
+      state: String,
+      zipCode: String,
+      country: String
+    }
+  ]
 }, {
   timestamps: true
 });

@@ -127,4 +127,31 @@ exports.protect = async (req, res, next) => {
       message: 'Please log in to get access'
     });
   }
+};
+
+exports.updateProfile = async (req, res) => {
+  try {
+    const updates = {};
+    const allowedFields = ['name', 'phoneNumber', 'addresses', 'profilePicture'];
+    allowedFields.forEach(field => {
+      if (req.body[field] !== undefined) updates[field] = req.body[field];
+    });
+    const user = await User.findByIdAndUpdate(req.user._id, updates, { new: true, runValidators: true });
+    if (!user) return res.status(404).json({ status: 'fail', message: 'User not found' });
+    user.password = undefined;
+    res.status(200).json({ status: 'success', data: { user } });
+  } catch (error) {
+    res.status(400).json({ status: 'fail', message: error.message });
+  }
+};
+
+exports.getMe = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) return res.status(404).json({ status: 'fail', message: 'User not found' });
+    user.password = undefined;
+    res.status(200).json({ status: 'success', data: { user } });
+  } catch (error) {
+    res.status(400).json({ status: 'fail', message: error.message });
+  }
 }; 
