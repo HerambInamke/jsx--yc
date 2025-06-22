@@ -1,19 +1,28 @@
-const express = require('express');
+import express from 'express';
+import {
+  getAllEvents,
+  searchEvents,
+  getEvent,
+  createEvent,
+  updateEvent,
+  deleteEvent
+} from '../controllers/event.controller.js';
+
+import { protect } from '../controllers/auth.controller.js';
+
 const router = express.Router();
-const eventController = require('../controllers/event.controller');
-const authController = require('../controllers/auth.controller');
 
 // Public routes
-router.get('/', eventController.getAllEvents);
-router.get('/search', eventController.searchEvents);
-router.get('/:id', eventController.getEvent);
+router.get('/', getAllEvents);
+router.get('/search', searchEvents);
+router.get('/:id', getEvent);
 
 // Protected routes
-router.use(authController.protect);
+router.use(protect);
 
 // Admin only routes
-router.post('/', eventController.createEvent);
-router.patch('/:id', eventController.updateEvent);
-router.delete('/:id', eventController.deleteEvent);
+router.post('/', createEvent);
+router.patch('/:id', updateEvent);
+router.delete('/:id', deleteEvent);
 
-module.exports = router; 
+export default router;

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const eventSchema = new mongoose.Schema({
   name: {
@@ -76,4 +76,5 @@ eventSchema.virtual('isSoldOut').get(function() {
   return this.ticketTypes.every(type => type.quantity === 0);
 });
 
-module.exports = mongoose.model('Event', eventSchema); 
+const Event = mongoose.model('Event', eventSchema);
+export default Event;

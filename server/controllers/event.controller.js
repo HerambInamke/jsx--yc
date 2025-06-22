@@ -1,7 +1,7 @@
-const Event = require('../models/Event');
+import Event from '../models/Event.js';
 
 // Get all events
-exports.getAllEvents = async (req, res) => {
+export const getAllEvents = async (req, res) => {
   try {
     const events = await Event.find();
     
@@ -21,7 +21,7 @@ exports.getAllEvents = async (req, res) => {
 };
 
 // Get single event
-exports.getEvent = async (req, res) => {
+export const getEvent = async (req, res) => {
   try {
     const event = await Event.findById(req.params.id);
     
@@ -47,7 +47,7 @@ exports.getEvent = async (req, res) => {
 };
 
 // Create new event
-exports.createEvent = async (req, res) => {
+export const createEvent = async (req, res) => {
   try {
     const event = await Event.create(req.body);
 
@@ -66,7 +66,7 @@ exports.createEvent = async (req, res) => {
 };
 
 // Update event
-exports.updateEvent = async (req, res) => {
+export const updateEvent = async (req, res) => {
   try {
     const event = await Event.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
@@ -95,7 +95,7 @@ exports.updateEvent = async (req, res) => {
 };
 
 // Delete event
-exports.deleteEvent = async (req, res) => {
+export const deleteEvent = async (req, res) => {
   try {
     const event = await Event.findByIdAndDelete(req.params.id);
 
@@ -119,7 +119,7 @@ exports.deleteEvent = async (req, res) => {
 };
 
 // Search events
-exports.searchEvents = async (req, res) => {
+export const searchEvents = async (req, res) => {
   try {
     const { keyword, category, date, price } = req.query;
     const query = {};

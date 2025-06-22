@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const bookingSchema = new mongoose.Schema({
   user: {
@@ -73,4 +73,5 @@ bookingSchema.pre(/^find/, function(next) {
   next();
 });
 
-module.exports = mongoose.model('Booking', bookingSchema); 
+const Booking = mongoose.model('Booking', bookingSchema);
+export default Booking;

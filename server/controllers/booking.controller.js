@@ -1,8 +1,8 @@
-const Booking = require('../models/Booking');
-const Event = require('../models/Event');
+import Booking from '../models/Booking.js';
+import Event from '../models/Event.js';
 
 // Create new booking
-exports.createBooking = async (req, res) => {
+export const createBooking = async (req, res) => {
   try {
     const { eventId, tickets, paymentInfo } = req.body;
 
@@ -65,7 +65,7 @@ exports.createBooking = async (req, res) => {
 };
 
 // Get user bookings
-exports.getUserBookings = async (req, res) => {
+export const getUserBookings = async (req, res) => {
   try {
     const bookings = await Booking.find({ user: req.user._id });
 
@@ -85,7 +85,7 @@ exports.getUserBookings = async (req, res) => {
 };
 
 // Get single booking
-exports.getBooking = async (req, res) => {
+export const getBooking = async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.id);
 
@@ -119,7 +119,7 @@ exports.getBooking = async (req, res) => {
 };
 
 // Cancel booking
-exports.cancelBooking = async (req, res) => {
+export const cancelBooking = async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.id);
 

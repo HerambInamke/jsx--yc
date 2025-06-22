@@ -1,9 +1,15 @@
-const http = require('http');
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-const morgan = require('morgan');
-require('dotenv').config();
+import http from 'http';
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
+import morgan from 'morgan';
+import dotenv from 'dotenv';
+import authRoutes from './routes/auth.routes.js';
+import eventRoutes from './routes/event.routes.js';
+import bookingRoutes from './routes/booking.routes.js';
+import paymentRoutes from './routes/payment.routes.js'
+
+dotenv.config();
 
 const app = express();
 
@@ -18,17 +24,18 @@ app.get('/', (req, res) => {
 });
 
 // API Routes
-app.use('/api/auth', require('./routes/auth.routes'));
-app.use('/api/events', require('./routes/event.routes'));
-app.use('/api/bookings', require('./routes/booking.routes'));
+app.use('/api/auth', authRoutes);
+app.use('/api/events', eventRoutes);
+app.use('/api/bookings', bookingRoutes);
+app.use('/api/payments', paymentRoutes);
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-.then(() => console.log('✅MongoDB Connected'))
-.catch(err => console.error('❌MongoDB Connection Error:', err));
+.then(() => console.log('✅ MongoDB Connected'))
+.catch(err => console.error('❌ MongoDB Connection Error:', err));
 
 // Error Handler
 app.use((err, req, res, next) => {
@@ -43,5 +50,5 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 5000;
 
 http.createServer(app).listen(PORT, () => {
-  console.log(`✅Server running at http://localhost:${PORT}`);
+  console.log(`✅ Server running at http://localhost:${PORT}`);
 });

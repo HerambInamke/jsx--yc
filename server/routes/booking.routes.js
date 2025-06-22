@@ -1,14 +1,19 @@
-const express = require('express');
+import express from 'express';
+import {
+  createBooking,
+  getUserBookings,
+  getBooking,
+  cancelBooking
+} from '../controllers/booking.controller.js';
+import { protect } from '../controllers/auth.controller.js';
+
 const router = express.Router();
-const bookingController = require('../controllers/booking.controller');
-const authController = require('../controllers/auth.controller');
 
-// All routes are protected
-router.use(authController.protect);
+router.use(protect);
 
-router.post('/', bookingController.createBooking);
-router.get('/my-bookings', bookingController.getUserBookings);
-router.get('/:id', bookingController.getBooking);
-router.patch('/:id/cancel', bookingController.cancelBooking);
+router.post('/', createBooking);
+router.get('/my-bookings', getUserBookings);
+router.get('/:id', getBooking);
+router.patch('/:id/cancel', cancelBooking);
 
-module.exports = router; 
+export default router;

@@ -1,5 +1,5 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+import jwt from 'jsonwebtoken';
+import User from '../models/User.js';
 
 const signToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
@@ -7,7 +7,7 @@ const signToken = (id) => {
   });
 };
 
-exports.register = async (req, res) => {
+export const register = async (req, res) => {
   try {
     const { name, email, password, phoneNumber } = req.body;
 
@@ -49,7 +49,7 @@ exports.register = async (req, res) => {
   }
 };
 
-exports.login = async (req, res) => {
+export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -91,7 +91,7 @@ exports.login = async (req, res) => {
   }
 };
 
-exports.protect = async (req, res, next) => {
+export const protect = async (req, res, next) => {
   try {
     // Get token
     let token;
