@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import { handleRazorpayPayment } from '../lib/payment.js';
+
 
 export default function PaymentPage() {
   const [paymentMethod, setPaymentMethod] = useState('card');
