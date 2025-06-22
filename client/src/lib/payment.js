@@ -23,7 +23,7 @@ export const handleRazorpayPayment = async ({ amount, name, email, contact }) =>
     }
 
     try {
-        const { data: order } = await api.post('/payment/create-order', {
+        const { data: order } = await api.post('/payments/create-order', {
             amount: amount * 100, // paise
         });
 
@@ -36,7 +36,7 @@ export const handleRazorpayPayment = async ({ amount, name, email, contact }) =>
             description: "Payment for services",
             handler: async (response) => {
                 try {
-                    const { data: verifyData } = await api.post('/payment/verify', response);
+                    const { data: verifyData } = await api.post('/payments/verify', response);
                     alert(verifyData.message);
                 } catch (err) {
                     alert(err.message || "Verification failed");
