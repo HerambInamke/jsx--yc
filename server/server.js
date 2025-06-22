@@ -24,6 +24,8 @@ app.use('/api/v1/concerts', require('./routes/event.routes'));
 app.use('/api/v1/bookings', require('./routes/booking.routes'));
 app.use('/api/v1/hotels', require('./routes/hotel.routes'));
 app.use('/api/v1/packages', require('./routes/package.routes'));
+app.use('/api/v1/payments', require('./routes/payment.routes'));
+
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI, {
