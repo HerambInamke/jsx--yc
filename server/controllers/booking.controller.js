@@ -1,6 +1,7 @@
 const Booking = require('../models/Booking');
 const Event = require('../models/Event');
 const Package = require('../models/Package');
+const { calculatePlatformFee } = require('../utils/fees');
 
 // Create new booking (event or package)
 exports.createBooking = async (req, res) => {
@@ -63,8 +64,19 @@ exports.createBooking = async (req, res) => {
       return res.status(400).json({ status: 'fail', message: 'Must provide either eventId or packageId' });
     }
 
+    // Calculate platform/service fee
+    const platformFee = calculatePlatformFee(totalAmount);
+    const grandTotal = totalAmount + platformFee;
+
     const booking = await Booking.create(bookingData);
-    res.status(201).json({ status: 'success', data: { booking } });
+    res.status(201).json({ 
+      status: 'success', 
+      data: { 
+        booking, 
+        platformFee, 
+        grandTotal 
+      } 
+    });
   } catch (error) {
     res.status(400).json({ status: 'fail', message: error.message });
   }
