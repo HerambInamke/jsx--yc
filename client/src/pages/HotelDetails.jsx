@@ -85,6 +85,14 @@ const HotelDetails = () => {
 
       {/* Filters Section */}
       <div className="container py-8">
+        <div className="flex justify-end mb-4">
+          <button
+            className="px-6 py-2 bg-festival-primary-dark text-white rounded-lg hover:bg-festival-primary transition-colors font-semibold"
+            onClick={() => navigate('/precart')}
+          >
+            Skip Hotel
+          </button>
+        </div>
         <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <FormControl fullWidth size="small">
