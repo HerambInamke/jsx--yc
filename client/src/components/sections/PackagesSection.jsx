@@ -23,8 +23,9 @@ const packages = [
     timeRange: '7 PM - 11:30 PM',
     locationDetails: '456 Rock St, Music City, MC 12345',
     hotelName: 'Rhythm Hotel',
-    hotelDetails: 'Theme rooms with sound systems',
+    hotelDetails: 'Theme rooms with sound systems, rooftop bar, late checkout',
     date: '2025-05-02',
+    description: 'Experience the best of EDM with top DJs and a vibrant crowd. Includes exclusive after-party access and complimentary drinks.'
   },
   {
     id: '3',
@@ -34,8 +35,9 @@ const packages = [
     timeRange: '6 PM - 10:00 PM',
     locationDetails: '789 Jazz Ave, Music City, MC 12345',
     hotelName: 'Melody Hotel',
-    hotelDetails: 'Boutique hotel with live music',
+    hotelDetails: 'Boutique hotel with live music, pool access, and free breakfast',
     date: '2025-06-10',
+    description: 'Enjoy a summer night with chart-topping pop artists. Package includes VIP seating and a welcome gift.'
   },
 ]
 
@@ -52,14 +54,11 @@ export default function PackagesSection() {
           ref={scrollRef}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {packages.map((pkg, idx) => (
+          {packages.map((pkg) => (
             <PackageCard
               key={pkg.id}
               {...pkg}
-              onMoreInfoClick={() => {
-                if (idx === 0) navigate('/packages/1');
-                else navigate(`/packages/${pkg.id}`);
-              }}
+              onMoreInfoClick={() => navigate(`/packages/${pkg.id}`)}
             />
           ))}
         </div>

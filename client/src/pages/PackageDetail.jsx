@@ -28,6 +28,58 @@ const packageDetails = {
       ],
     },
   },
+  '2': {
+    title: 'Electronic Dreams Package',
+    image: '/YC (IMG)/593532f2da6dde2b77402dcc.webp',
+    price: '₹2,499',
+    date: 'May 2, 2025',
+    time: '7 PM - 11:30 PM',
+    location: '456 Rock St, Music City',
+    description: 'Experience the best of EDM with top DJs and a vibrant crowd. Includes exclusive after-party access and complimentary drinks.',
+    features: [
+      'Access to main event and after-party',
+      'Complimentary welcome drinks',
+      'VIP dance floor area',
+      'Meet & greet with DJs',
+      'Festival merchandise pack',
+    ],
+    hotel: {
+      name: 'Rhythm Hotel',
+      image: '/YC (IMG)/GettyImages-2149383523-3.webp',
+      amenities: [
+        'Theme rooms with sound systems',
+        'Rooftop bar',
+        'Late checkout',
+        'Complimentary breakfast',
+      ],
+    },
+  },
+  '3': {
+    title: 'Summer Vibes Package',
+    image: '/YC (IMG)/GettyImages-2149383523-3.webp',
+    price: '₹2,799',
+    date: 'June 10, 2025',
+    time: '6 PM - 10:00 PM',
+    location: '789 Jazz Ave, Music City',
+    description: 'Enjoy a summer night with chart-topping pop artists. Package includes VIP seating and a welcome gift.',
+    features: [
+      'VIP seating close to the stage',
+      'Welcome gift on arrival',
+      'Access to exclusive after-party',
+      'Photo opportunity with artists',
+      'Complimentary snacks and drinks',
+    ],
+    hotel: {
+      name: 'Melody Hotel',
+      image: '/YC (IMG)/cold.webp',
+      amenities: [
+        'Boutique hotel with live music',
+        'Pool access',
+        'Free breakfast',
+        'Late checkout',
+      ],
+    },
+  },
 }
 
 export default function PackageDetail() {
