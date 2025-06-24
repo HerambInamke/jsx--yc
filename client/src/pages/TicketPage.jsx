@@ -53,9 +53,10 @@ export default function TicketPage() {
   const [zonesOpen, setZonesOpen] = useState(false)
   const [selectedZone, setSelectedZone] = useState(null)
   const [selectedTicket, setSelectedTicket] = useState(null)
-  const { addToCart } = useCart()
+  const { addToCart, cart } = useCart()
   const [ticketQuantities, setTicketQuantities] = useState(() => ticketData.reduce((acc, t) => ({ ...acc, [t.id]: 0 }), {}))
   const [showAdded, setShowAdded] = useState(false)
+  const [showHotelPrompt, setShowHotelPrompt] = useState(false)
   
   useEffect(() => {
     const foundConcert = concertData.find(c => c.id === parseInt(id))
@@ -67,8 +68,12 @@ export default function TicketPage() {
   }, [id, navigate])
 
   const handleSelectTicket = () => {
-    navigate('/precart');
-  };
+    if (!cart.some(item => item.type === 'hotel')) {
+      setShowHotelPrompt(true)
+      return
+    }
+    navigate('/precart')
+  }
 
   if (!concert) {
     return (
@@ -88,6 +93,8 @@ export default function TicketPage() {
     month: 'long',
     day: 'numeric'
   })
+
+  const hasHotel = cart.some(item => item.type === 'hotel')
 
   return (
     <div className="min-h-screen bg-gray-50 pt-20 pb-16">
@@ -292,9 +299,10 @@ export default function TicketPage() {
                     <button 
                       onClick={() => {
                         if (ticketQuantities[ticket.id] > 0) {
-                          addToCart(ticket, ticketQuantities[ticket.id]);
-                          setShowAdded(true);
-                          setTimeout(() => setShowAdded(false), 1500);
+                          addToCart(ticket, ticketQuantities[ticket.id])
+                          setShowAdded(true)
+                          setTimeout(() => setShowAdded(false), 1500)
+                          setTimeout(() => setShowHotelPrompt(true), 1600)
                         }
                       }}
                       className="bg-festival-primary text-white px-6 py-2 rounded-lg hover:bg-festival-primary-dark transition-colors font-semibold shadow-md hover:shadow-lg"
@@ -333,6 +341,25 @@ export default function TicketPage() {
           </svg>
         </button>
       </div>
+
+      {/* Hotel Prompt Modal */}
+      {showHotelPrompt && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl shadow-lg p-8 max-w-md w-full text-center">
+            <h2 className="text-2xl font-bold mb-4 text-festival-primary">Book Your Stay!</h2>
+            <p className="mb-6 text-gray-700">To complete your booking, please select a hotel for your stay.</p>
+            <button
+              className="w-full bg-festival-primary text-white py-3 rounded-lg font-semibold hover:bg-festival-primary-dark transition"
+              onClick={() => {
+                setShowHotelPrompt(false)
+                navigate('/hotels')
+              }}
+            >
+              Check Hotels
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
