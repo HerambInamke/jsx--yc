@@ -69,7 +69,7 @@ export default function HomePage() {
                     <div className="flex gap-4">
                         <button
                             onClick={() => navigate('/explore')}
-                            className="px-6 py-3 bg-festival-secondary text-white rounded-lg hover:bg-festival-secondary-dark transition-colors"
+                            className="px-6 py-3 bg-festival-primary text-white rounded-lg hover:bg-festival-primary-dark transition-colors"
                         >
                             Explore Events
                         </button>
@@ -188,7 +188,7 @@ export default function HomePage() {
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="px-8 py-4 bg-festival-secondary text-white rounded-full font-medium hover:bg-festival-secondary-dark transition-colors"
+                                className="px-8 py-4 bg-festival-primary text-white rounded-full font-medium hover:bg-festival-primary-dark transition-colors"
                             >
                                 Subscribe
                             </motion.button>
@@ -226,7 +226,7 @@ export default function HomePage() {
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             onClick={() => navigate('/explore')}
-                            className="px-8 py-3 bg-festival-secondary text-white rounded-lg hover:bg-festival-secondary-dark transition-colors"
+                            className="px-8 py-3 bg-festival-primary text-white rounded-lg hover:bg-festival-primary-dark transition-colors"
                         >
                             Explore Events
                         </motion.button>

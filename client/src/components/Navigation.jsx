@@ -92,7 +92,7 @@ export default function Navigation() {
             
             {isAuthenticated ? (
               <>
-                <Link to="/cart" className="p-2 text-gray-600 hover:text-festival-primary transition-colors">
+                <Link to="/precart" className="p-2 text-gray-600 hover:text-festival-primary transition-colors">
                   <ShoppingCartIcon className="h-6 w-6" />
                 </Link>
                 <div className="relative">
@@ -196,7 +196,7 @@ export default function Navigation() {
                       Profile
                     </Link>
                     <Link
-                      to="/cart"
+                      to="/precart"
                       className="block py-2 text-sm text-gray-600 hover:text-festival-primary"
                       onClick={() => setIsOpen(false)}
                     >

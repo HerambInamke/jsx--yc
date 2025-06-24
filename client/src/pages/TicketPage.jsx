@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { FaChevronDown, FaFilter, FaMapMarkerAlt, FaClock, FaCalendarAlt } from 'react-icons/fa'
+import { useCart } from '../contexts/CartContext'
 
 const concertData = [
   {
@@ -52,6 +53,9 @@ export default function TicketPage() {
   const [zonesOpen, setZonesOpen] = useState(false)
   const [selectedZone, setSelectedZone] = useState(null)
   const [selectedTicket, setSelectedTicket] = useState(null)
+  const { addToCart } = useCart()
+  const [ticketQuantities, setTicketQuantities] = useState(() => ticketData.reduce((acc, t) => ({ ...acc, [t.id]: 0 }), {}))
+  const [showAdded, setShowAdded] = useState(false)
   
   useEffect(() => {
     const foundConcert = concertData.find(c => c.id === parseInt(id))
@@ -220,7 +224,7 @@ export default function TicketPage() {
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Seating Map */}
           <div className="lg:w-1/2">
-            <div className="bg-white rounded-xl p-6 shadow-md">
+            <div className="bg-white rounded-xl p-6 shadow-md sticky top-24 z-20">
               <h2 className="text-xl font-semibold mb-4 text-gray-800">Venue Map</h2>
               <div className="relative overflow-hidden rounded-lg">
                 <img 
@@ -250,6 +254,12 @@ export default function TicketPage() {
                   <span className="text-sm text-gray-600">Selected</span>
                 </div>
               </div>
+              {/* Ticker-style scrolling */}
+              <div className="mt-6 overflow-x-auto whitespace-nowrap border-t pt-3 animate-marquee text-festival-primary font-semibold text-sm">
+                <span className="inline-block mr-8">VIP Section: Premium viewing • Dedicated entrance • Lounge access</span>
+                <span className="inline-block mr-8">General Admission: Standing area • First come, first served • Main facilities</span>
+                <span className="inline-block mr-8">Parking • Shuttle Service • Food & Beverage • Medical Services</span>
+              </div>
             </div>
           </div>
 
@@ -273,18 +283,32 @@ export default function TicketPage() {
                       <div className="text-xs text-gray-500">per ticket</div>
                     </div>
                   </div>
-                  <div className="space-y-2 text-sm text-gray-600">
-                    <p>Center stage view • Good visibility</p>
-                    <p>Electronic tickets • Instant delivery</p>
+                  <div className="flex items-center gap-2 mt-2">
+                    <button onClick={() => setTicketQuantities(q => ({ ...q, [ticket.id]: Math.max(0, q[ticket.id] - 1) }))} className="px-2 py-1 bg-gray-200 rounded">-</button>
+                    <span className="w-8 text-center">{ticketQuantities[ticket.id]}</span>
+                    <button onClick={() => setTicketQuantities(q => ({ ...q, [ticket.id]: q[ticket.id] + 1 }))} className="px-2 py-1 bg-gray-200 rounded">+</button>
                   </div>
-                  <div className="mt-6 flex justify-end">
+                  <div className="mt-4 flex gap-2">
+                    <button 
+                      onClick={() => {
+                        if (ticketQuantities[ticket.id] > 0) {
+                          addToCart(ticket, ticketQuantities[ticket.id]);
+                          setShowAdded(true);
+                          setTimeout(() => setShowAdded(false), 1500);
+                        }
+                      }}
+                      className="bg-festival-primary text-white px-6 py-2 rounded-lg hover:bg-festival-primary-dark transition-colors font-semibold shadow-md hover:shadow-lg"
+                    >
+                      Add to Cart
+                    </button>
                     <button 
                       onClick={handleSelectTicket}
-                      className="bg-festival-primary text-white px-8 py-3 rounded-full hover:bg-opacity-90 transition-colors font-semibold shadow-md hover:shadow-lg"
+                      className="bg-gray-100 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-200 transition-colors font-semibold shadow-md hover:shadow-lg"
                     >
-                      SELECT TICKETS
+                      Go to Cart
                     </button>
                   </div>
+                  {showAdded && <div className="text-green-600 mt-2">Added to cart!</div>}
                 </motion.div>
               ))}
               

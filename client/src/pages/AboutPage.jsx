@@ -18,28 +18,28 @@ export default function AboutPage() {
         >
           <h1 className="text-4xl font-bold mb-8">About Your Concert</h1>
           
-          <div className="prose prose-lg">
+          <div className="prose prose-lg max-w-none">
             <p className="text-xl text-gray-600 mb-8">
               Your Concert is India's premier music festival platform, bringing together the best artists and unforgettable experiences since 2024.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-              <div className="bg-white p-6 rounded-xl shadow-sm">
-                <h3 className="text-xl font-semibold mb-4">Our Mission</h3>
+              <div className="bg-white p-6 rounded-xl shadow-md border border-festival-primary/10">
+                <h3 className="text-xl font-semibold mb-4 text-festival-primary">Our Mission</h3>
                 <p className="text-gray-600">
                   To create extraordinary musical experiences that bring people together and celebrate the diversity of Indian and international music.
                 </p>
               </div>
 
-              <div className="bg-white p-6 rounded-xl shadow-sm">
-                <h3 className="text-xl font-semibold mb-4">Our Vision</h3>
+              <div className="bg-white p-6 rounded-xl shadow-md border border-festival-primary/10">
+                <h3 className="text-xl font-semibold mb-4 text-festival-primary">Our Vision</h3>
                 <p className="text-gray-600">
                   To become the most trusted and innovative platform for live music experiences in India.
                 </p>
               </div>
             </div>
 
-            <h2 className="text-2xl font-bold mb-6">Why Choose Us?</h2>
+            <h2 className="text-2xl font-bold mb-6 text-festival-primary">Why Choose Us?</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
               {[
                 {
@@ -55,27 +55,30 @@ export default function AboutPage() {
                   description: 'Special packages and VIP experiences for our customers',
                 },
               ].map((item) => (
-                <div key={item.title} className="bg-white p-6 rounded-xl shadow-sm">
-                  <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-                  <p className="text-gray-600">{item.description}</p>
+                <div key={item.title} className="bg-white p-6 rounded-xl shadow-md border border-festival-primary/10 flex flex-col items-center">
+                  <div className="w-12 h-12 mb-4 rounded-full bg-festival-primary/10 flex items-center justify-center">
+                    <span className="text-festival-primary text-2xl">🎵</span>
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2 text-festival-primary">{item.title}</h3>
+                  <p className="text-gray-600 text-center">{item.description}</p>
                 </div>
               ))}
             </div>
 
-            <h2 className="text-2xl font-bold mb-6">Our Team</h2>
+            <h2 className="text-2xl font-bold mb-6 text-festival-primary">Our Team</h2>
             <p className="text-gray-600 mb-8">
               We're a passionate team of music lovers, event organizers, and technology experts working together to bring you the best concert experiences.
             </p>
 
-            <div className="bg-festival-primary/5 p-8 rounded-xl mb-12">
-              <h2 className="text-2xl font-bold mb-4">Get in Touch</h2>
+            <div className="bg-festival-primary/10 p-8 rounded-xl mb-12 border border-festival-primary/20">
+              <h2 className="text-2xl font-bold mb-4 text-festival-primary">Get in Touch</h2>
               <p className="text-gray-600">
                 Have questions or want to learn more about Your Concert? We'd love to hear from you!
               </p>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="mt-4 px-6 py-2 bg-festival-primary text-white rounded-lg hover:bg-festival-primary-dark transition-colors"
+                className="mt-4 px-6 py-2 bg-festival-primary text-white rounded-lg hover:bg-festival-primary-dark transition-colors shadow"
               >
                 Contact Us
               </motion.button>

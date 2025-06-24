@@ -1,34 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useTimer } from "react-timer-hook";
 import { Box, Modal, Button, Typography } from "@mui/material";
+import { useCart } from '../contexts/CartContext';
 
 const PreCartPage = () => {
-    // Set the timer to 10 minutes from now
-    const time = new Date();
-    time.setMinutes(time.getMinutes() + 10);
-
-    const {
-        seconds,
-        minutes,
-        hours,
-        isRunning,
-        restart,
-    } = useTimer({
-        expiryTimestamp: time,
-        onExpire: () => console.warn("Timer expired"),
-    });
-
-    // Modals
-    const [openTicketModal, setOpenTicketModal] = React.useState(false);
-    const [openHotelModal, setOpenHotelModal] = React.useState(false);
-
-    const handleOpenTicketModal = () => setOpenTicketModal(true);
-    const handleCloseTicketModal = () => setOpenTicketModal(false);
-
-    const handleOpenHotelModal = () => setOpenHotelModal(true);
-    const handleCloseHotelModal = () => setOpenHotelModal(false);
-
     const style = {
         position: 'absolute',
         top: '50%',
@@ -41,123 +16,75 @@ const PreCartPage = () => {
         p: 4,
     };
 
+    const { cart, removeFromCart } = useCart();
+
+    // Calculate totals
+    const subtotal = cart.reduce((sum, item) => sum + (parseInt(item.price.toString().replace(/[^\d]/g, '')) * item.quantity), 0);
+    const serviceFee = Math.round(subtotal * 0.05); // 5% service fee
+    const platformFee = Math.round(subtotal * 0.03); // 3% platform fee
+    const total = subtotal + serviceFee + platformFee;
+
     return (
         <div className="min-h-screen bg-gray-100 p-4 my-16 md:p-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
                 {/* Left Section */}
                 <div className="md:col-span-2 space-y-8 place-content-center">
-
-                    {/* Ticket Info Card */}
-                    <div className="relative flex flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden min-h-[180px]">
-                        <div className="w-full md:w-1/3 h-48 md:h-auto">
-                            <img src="/YC (IMG)/cold.webp" alt="Coldplay Concert" className="w-full h-full object-cover" />
+                    {/* Cart Items */}
+                    {cart.length === 0 ? (
+                        <div className="bg-white rounded-xl shadow-lg p-8 text-center text-gray-500">
+                            No items in your cart.
                         </div>
-                        <div className="flex-1 p-4 relative flex flex-col justify-center">
-                            <div className="absolute top-4 right-2 text-xl font-semibold text-gray-700">₹4,999</div>
-                            <h2 className="text-lg font-semibold">Coldplay</h2>
-                            <p className="text-sm text-gray-500">VIP Pass</p>
-                            <p className="text-xs text-gray-400 mt-1">NSCI Dome, Mumbai</p>
-                            <p className="text-xs text-gray-400 mt-1">7:30 PM, 24th May 2025</p>
-                        </div>
-                        <div className="flex items-end justify-end p-2">
-                            <Button className="text-gray-400" onClick={handleOpenTicketModal}>▼</Button>
-                            <Modal
-                                open={openTicketModal}
-                                onClose={handleCloseTicketModal}
-                                aria-labelledby="ticket-modal-title"
-                                aria-describedby="ticket-modal-description"
-                            >
-                                <Box sx={style}>
-                                    <Typography id="ticket-modal-title" variant="h6" component="h2">
-                                        Event Details
-                                    </Typography>
-                                    <Typography id="ticket-modal-description" sx={{ mt: 2 }}>
-                                        <ul style={{ paddingLeft: '1rem', listStyleType: 'disc' }}>
-                                            <li><strong>Event:</strong> Coldplay Concert VIP Pass</li>
-                                            <li><strong>Venue:</strong> NSCI Dome, Mumbai</li>
-                                            <li><strong>Entry Time:</strong> From 6:30 PM</li>
-                                            <li><strong>Event Start Time:</strong> 7:30 PM on 24th May 2025</li>
-                                            <li><strong>ID Requirement:</strong> Valid government-issued ID required for entry</li>
-                                            <li><strong>Policy:</strong> No re-entry allowed once inside</li>
-                                        </ul>
-                                    </Typography>
-                                </Box>
-                            </Modal>
-                        </div>
-                    </div>
-
-                    {/* Hotel Info Card */}
-                    <div className="relative flex flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden min-h-[180px]">
-                        <div className="w-full md:w-1/3 h-48 md:h-auto">
-                            <img src="/HotelImages/image_2.png" alt="Hotel Booking" className="w-full h-full object-cover" />
-                        </div>
-                        <div className="flex-1 p-4 relative flex flex-col justify-center">
-                            <div className="absolute top-4 right-2 text-xl font-semibold text-gray-700">₹7,200</div>
-                            <h2 className="text-lg font-semibold">Taj Lands End</h2>
-                            <p className="text-sm text-gray-500">1 Night Stay · Deluxe Room</p>
-                            <p className="text-xs text-gray-400 mt-1">Bandra West, Mumbai</p>
-                            <p className="text-xs text-gray-400 mt-1">Check-in: 24th May · Check-out: 25th May</p>
-                        </div>
-                        <div className="flex items-end justify-end p-2">
-                            <Button className="text-gray-400" onClick={handleOpenHotelModal}>▼</Button>
-                            <Modal
-                                open={openHotelModal}
-                                onClose={handleCloseHotelModal}
-                                aria-labelledby="hotel-modal-title"
-                                aria-describedby="hotel-modal-description"
-                            >
-                                <Box sx={style}>
-                                    <Typography id="hotel-modal-title" variant="h6" component="h2">
-                                        Hotel Details
-                                    </Typography>
-                                    <Typography id="hotel-modal-description" sx={{ mt: 2 }}>
-                                        <ul style={{ paddingLeft: '1rem', listStyleType: 'disc' }}>
-                                            <li><strong>Hotel:</strong> Taj Lands End, Bandra West, Mumbai</li>
-                                            <li><strong>Room Type:</strong> Deluxe Room with premium amenities</li>
-                                            <li><strong>Includes:</strong> 1-night stay, complimentary breakfast, access to swimming pool and spa</li>
-                                            <li><strong>Check-in:</strong> From 2:00 PM on 24th May 2025</li>
-                                            <li><strong>Check-out:</strong> By 11:00 AM on 25th May 2025</li>
-                                            <li><strong>ID Requirement:</strong> Valid government-issued ID required during check-in</li>
-                                            <li><strong>Special Requests:</strong> Early check-in, late check-out, or room preferences must be coordinated directly with the hotel</li>
-                                        </ul>
-                                    </Typography>
-                                </Box>
-                            </Modal>
-                        </div>
-                    </div>
+                    ) : (
+                        cart.map(item => (
+                            <div key={item.id} className="relative flex flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden min-h-[180px] mb-4 border border-gray-200">
+                                <div className="w-full md:w-1/3 h-48 md:h-auto bg-gray-50 flex items-center justify-center">
+                                    <img src={item.image || '/YC (IMG)/cold.webp'} alt={item.section} className="w-full h-full object-cover rounded-l-xl" />
+                                </div>
+                                <div className="flex-1 p-6 relative flex flex-col justify-center">
+                                    <div className="flex justify-between items-center mb-2">
+                                        <h2 className="text-xl font-semibold text-festival-primary">{item.section}</h2>
+                                        <span className="text-lg font-bold text-gray-700">{item.price}</span>
+                                    </div>
+                                    <p className="text-sm text-gray-500 mb-1">Row {item.row}</p>
+                                    <p className="text-xs text-gray-400 mb-1">Quantity: {item.quantity}</p>
+                                    <button
+                                        onClick={() => removeFromCart(item.id)}
+                                        className="mt-2 px-3 py-1 bg-red-100 text-red-600 rounded hover:bg-red-200 transition-colors w-fit text-xs font-medium"
+                                    >
+                                        Remove
+                                    </button>
+                                </div>
+                            </div>
+                        ))
+                    )}
                 </div>
-
                 {/* Right Section */}
-                <div className="space-y-6 p-4 rounded-lg bg-[#e3e3e3cb] shadow-md">
-                    {/* warning */}
-                    <div className="bg-white p-6 rounded-xl shadow text-center">
-                        <p class="text-sm text-red-600 font-medium">
-                            The tickets and hotel room you've added to your cart are not reserved yet. To secure your booking, please click <strong>Confirm & Pay</strong> within the next 10 minutes. A timer will start once you proceed.
-                        </p>
-                    </div>
-
-                    {/* Continue Button & Booking Summary */}
-                    <div className="bg-white p-6 rounded-xl shadow flex flex-col items-center">
-                        <Link to="/cart" className="w-full">
-                            <button className="w-full bg-gradient-to-r bg-purple-600 text-white py-2 rounded-lg font-semibold hover:bg-purple-900 transition">
-                                CONFIRM
+                <div className="space-y-6 p-4 rounded-lg bg-white shadow-md border border-gray-200">
+                    {/* Booking Summary */}
+                    <div className="bg-gray-50 p-6 rounded-xl shadow flex flex-col items-center">
+                        <div className="w-full h-fit bg-white rounded p-4 text-sm text-gray-700 space-y-2 border border-gray-100">
+                            <div className="flex justify-between">
+                                <span>Subtotal</span>
+                                <span>₹{subtotal.toLocaleString()}</span>
+                            </div>
+                            <div className="flex justify-between">
+                                <span>Service Fee (5%)</span>
+                                <span>₹{serviceFee.toLocaleString()}</span>
+                            </div>
+                            <div className="flex justify-between">
+                                <span>Platform Fee (3%)</span>
+                                <span>₹{platformFee.toLocaleString()}</span>
+                            </div>
+                            <div className="border-t border-gray-300 pt-2 flex justify-between font-medium text-gray-800 text-lg">
+                                <span>Total</span>
+                                <span>₹{total.toLocaleString()}</span>
+                            </div>
+                        </div>
+                        <Link to="/cart" className="w-full mt-6">
+                            <button className="w-full bg-gradient-to-r from-festival-primary to-festival-primary-dark text-white py-3 rounded-lg font-semibold hover:from-festival-primary-dark hover:to-festival-primary transition">
+                                CONFIRM & PAY
                             </button>
                         </Link>
-
-                        <div className="w-full h-fit mt-4 bg-gray-100 rounded p-4 text-sm text-gray-700 space-y-2">
-                            <div className="flex justify-between">
-                                <span>Concert Ticket</span>
-                                <span>₹4,999</span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span>Hotel (1 Night)</span>
-                                <span>₹7,200</span>
-                            </div>
-                            <div className="border-t border-gray-300 pt-2 flex justify-between font-medium text-gray-800">
-                                <span>Total</span>
-                                <span>₹12,199</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

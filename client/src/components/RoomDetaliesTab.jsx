@@ -14,7 +14,7 @@ const RoomDetailsTab = (props) => {
     >
       {/* Room Image */}
       <img
-        className="object-cover aspect-square w-[5.5rem] sm:w-[13rem] rounded-lg sm:rounded-2xl"
+        className="object-cover aspect-square w-20 sm:w-32 rounded-lg sm:rounded-2xl"
         src={props.coverImg}
         alt={props.name}
       />
@@ -37,7 +37,7 @@ const RoomDetailsTab = (props) => {
         {/* Price & Button */}
         <div className="flex flex-col ml-auto items-center justify-between">
           <h3 className="text-[0.75rem] sm:text-2xl font-light">INR {props.price}</h3>
-          <button className="bg-[#510378] text-white mt-auto text-[0.6rem] sm:text-[1.2rem] font-light h-5 sm:h-10 w-18 sm:w-40 rounded-md sm:rounded-lg">
+          <button className="bg-festival-primary text-white mt-auto text-[0.6rem] sm:text-[1.2rem] font-light h-5 sm:h-10 w-18 sm:w-40 rounded-md sm:rounded-lg">
             {props.isSelected ? "Selected" : "Select"}
           </button>
         </div>

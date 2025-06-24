@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+
 export default function PackageCard({
   image,
   concertName,
@@ -7,6 +9,7 @@ export default function PackageCard({
   hotelName,
   hotelDetails,
   onMoreInfoClick,
+  date,
 }) {
   return (
     <div className="w-[409px] h-[765px] bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-festival-purple/20 hover:border-2">
@@ -17,6 +20,11 @@ export default function PackageCard({
       
       <div className="p-6 space-y-6 flex flex-col h-[calc(765px-272px)]">
         <div>
+          {date && (
+            <div className="text-xs text-festival-primary font-semibold mb-1">
+              {format(new Date(date), 'EEE, MMM d, yyyy')}
+            </div>
+          )}
           <h3 className="text-xl font-semibold mb-1">{concertName}</h3>
           <p className="text-festival-purple">{artistName}</p>
         </div>

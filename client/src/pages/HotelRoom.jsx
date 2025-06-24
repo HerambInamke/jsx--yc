@@ -8,6 +8,7 @@ import { Button, Rating } from "@mui/material";
 import { AnimatePresence, motion } from 'framer-motion';
 
 import RoomDetailsTab from "../components/RoomDetaliesTab.jsx";
+import { useCart } from "../contexts/CartContext.jsx";
 
 const HotelRoom = () => {
     // Lifted state for the selected room
@@ -15,6 +16,7 @@ const HotelRoom = () => {
     const [isMapOpen, setIsMapOpen] = React.useState(false);
 
     const navigate = useNavigate();
+    const { addToCart } = useCart();
 
     // Ref for the modal
     const modalRef = React.useRef();
@@ -83,9 +85,9 @@ const HotelRoom = () => {
     };
 
     // Render similar rooms with click handler
-    const roomList = roomData.map((room, index) => (
+    const roomList = roomData.map((room) => (
         <RoomDetailsTab
-            key={index}
+            key={room.name}
             name={room.name}
             location={room.location}
             coverImg={room.img[0]}
@@ -150,8 +152,8 @@ const HotelRoom = () => {
                             <span className="text-sm font-medium">{selectedRoom.rating}</span>
                         </div>
                         <ul className="text-sm list-disc ml-4 space-y-1">
-                            {selectedRoom.amenities.map((amenitie) => 
-                                <li>{amenitie}</li>
+                            {selectedRoom.amenities.map((amenitie, idx) => 
+                                <li key={amenitie + idx}>{amenitie}</li>
                             )}
                         </ul>
                     </div>
@@ -165,7 +167,18 @@ const HotelRoom = () => {
                                 backgroundColor: '#510378',
                                 '&:hover': { backgroundColor: '#3a025a' }
                             }}
-                            onClick={() => navigate("/precart")}
+                            onClick={() => {
+                                addToCart({
+                                    id: selectedRoom.name,
+                                    section: selectedRoom.name,
+                                    price: `₹${selectedRoom.price}`,
+                                    row: selectedRoom.location,
+                                    image: selectedRoom.img[0],
+                                    quantity: 1,
+                                    type: 'hotel'
+                                });
+                                navigate("/precart");
+                            }}
                         >
                             Add to Cart
                         </Button>

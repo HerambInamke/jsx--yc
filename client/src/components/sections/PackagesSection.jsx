@@ -13,6 +13,7 @@ const packages = [
     locationDetails: '123 Festival Ave, Music City, MC 12345',
     hotelName: 'Grand Hotel',
     hotelDetails: 'Luxury accommodation with festival shuttle service',
+    date: '2025-04-15',
   },
   {
     id: '2',
@@ -23,6 +24,7 @@ const packages = [
     locationDetails: '456 Rock St, Music City, MC 12345',
     hotelName: 'Rhythm Hotel',
     hotelDetails: 'Theme rooms with sound systems',
+    date: '2025-05-02',
   },
   {
     id: '3',
@@ -33,6 +35,7 @@ const packages = [
     locationDetails: '789 Jazz Ave, Music City, MC 12345',
     hotelName: 'Melody Hotel',
     hotelDetails: 'Boutique hotel with live music',
+    date: '2025-06-10',
   },
 ]
 
@@ -49,11 +52,14 @@ export default function PackagesSection() {
           ref={scrollRef}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {packages.map((pkg) => (
+          {packages.map((pkg, idx) => (
             <PackageCard
               key={pkg.id}
               {...pkg}
-              onMoreInfoClick={() => navigate(`/packages/${pkg.id}`)}
+              onMoreInfoClick={() => {
+                if (idx === 0) navigate('/packages/1');
+                else navigate(`/packages/${pkg.id}`);
+              }}
             />
           ))}
         </div>

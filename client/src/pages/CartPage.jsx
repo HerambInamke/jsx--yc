@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useTimer } from "react-timer-hook";
 import { Box, Modal, Button, Typography } from "@mui/material";
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../contexts/CartContext';
 
 const CartPage = () => {
     const navigate = useNavigate();
+    const { cart, clearCart, removeFromCart } = useCart();
     const time = new Date();
     time.setMinutes(time.getMinutes() + 10);
+    const [timerExpired, setTimerExpired] = React.useState(false);
 
     const {
         seconds,
@@ -14,10 +17,23 @@ const CartPage = () => {
         hours,
         isRunning,
         restart,
+        pause,
+        resume
     } = useTimer({
         expiryTimestamp: time,
-        onExpire: () => console.warn("Timer expired"),
+        onExpire: () => {
+            clearCart();
+            setTimerExpired(true);
+        },
     });
+
+    useEffect(() => {
+        if (cart.length === 0) {
+            pause();
+        } else {
+            resume();
+        }
+    }, [cart, pause, resume]);
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
@@ -39,114 +55,89 @@ const CartPage = () => {
         p: 4,
     };
 
+    // Calculate totals
+    const subtotal = cart.reduce((sum, item) => sum + (parseInt(item.price.toString().replace(/[^\d]/g, '')) * item.quantity), 0);
+    const serviceFee = Math.round(subtotal * 0.05); // 5% service fee
+    const platformFee = Math.round(subtotal * 0.03); // 3% platform fee
+    const total = subtotal + serviceFee + platformFee;
+
     return (
         <div className="min-h-screen bg-gray-100 p-4 my-16 md:p-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
                 {/* Left Section */}
                 <div className="md:col-span-2 space-y-8 place-content-center">
                     {/* Ticket Info Card */}
-                    <div className="relative flex flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden min-h-[180px]">
-                        <div className="w-full md:w-1/3 h-48 md:h-auto">
-                            <img src="/YC (IMG)/cold.webp" alt="Coldplay Concert" className="w-full h-full object-cover" />
-                        </div>
-                        <div className="flex-1 p-4 relative flex flex-col justify-center">
-                            <div className="absolute top-4 right-2 text-xl font-semibold text-gray-700">₹4,999</div>
-                            <h2 className="text-lg font-semibold">Coldplay</h2>
-                            <p className="text-sm text-gray-500">VIP Pass</p>
-                            <p className="text-xs text-gray-400 mt-1">NSCI Dome, Mumbai</p>
-                            <p className="text-xs text-gray-400 mt-1">7:30 PM, 24th May 2025</p>
-                        </div>
-                        <div className="flex items-end justify-end p-2">
-                            <Button className="text-gray-400" onClick={handleOpen}>▼</Button>
-                            <Modal open={open} onClose={handleClose}>
-                                <Box sx={style}>
-                                    <Typography variant="h6">Text in a modal</Typography>
-                                    <Typography sx={{ mt: 2 }}>
-                                        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                                    </Typography>
-                                </Box>
-                            </Modal>
-                        </div>
-                    </div>
-
-                    {/* Hotel Info Card */}
-                    <div className="relative flex flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden min-h-[180px]">
-                        <div className="w-full md:w-1/3 h-48 md:h-auto">
-                            <img src="/HotelImages/image_2.png" alt="Hotel Booking" className="w-full h-full object-cover" />
-                        </div>
-                        <div className="flex-1 p-4 relative flex flex-col justify-center">
-                            <div className="absolute top-4 right-2 text-xl font-semibold text-gray-700">₹7,200</div>
-                            <h2 className="text-lg font-semibold">Taj Lands End</h2>
-                            <p className="text-sm text-gray-500">1 Night Stay · Deluxe Room</p>
-                            <p className="text-xs text-gray-400 mt-1">Bandra West, Mumbai</p>
-                            <p className="text-xs text-gray-400 mt-1">Check-in: 24th May · Check-out: 25th May</p>
-                        </div>
-                        <div className="flex items-end justify-end p-2">
-                            <Button className="text-gray-400" onClick={handleOpen}>▼</Button>
-                            <Modal
-                                open={open}
-                                onClose={handleClose}
-                                aria-labelledby="modal-modal-title"
-                                aria-describedby="modal-modal-description"
+                    {cart.length === 0 ? (
+                        <div className="bg-white rounded-xl shadow-lg p-8 text-center text-gray-500">
+                            <h2 className="text-xl font-semibold mb-4">Your Cart is Empty</h2>
+                            <p>Add some items to your cart to start the reservation timer.</p>
+                            <button 
+                                onClick={() => navigate('/explore')} 
+                                className="mt-6 px-6 py-2 bg-festival-primary text-white rounded-lg hover:bg-festival-primary-dark transition-colors"
                             >
-                                <Box sx={style}>
-                                    <Typography id="modal-modal-title" variant="h6" component="h2">
-                                        Hotel details
-                                    </Typography>
-                                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                                        <ul style={{ paddingLeft: '1rem', listStyleType: 'disc' }}>
-                                            <li><strong>Hotel:</strong> Taj Lands End, Bandra West, Mumbai</li>
-                                            <li><strong>Room Type:</strong> Deluxe Room with premium amenities</li>
-                                            <li><strong>Includes:</strong> 1-night stay, complimentary breakfast, access to swimming pool and spa</li>
-                                            <li><strong>Check-in:</strong> From 2:00 PM on 24th May 2025</li>
-                                            <li><strong>Check-out:</strong> By 11:00 AM on 25th May 2025</li>
-                                            <li><strong>ID Requirement:</strong> Valid government-issued ID required during check-in</li>
-                                            <li><strong>Special Requests:</strong> Early check-in, late check-out, or room preferences must be coordinated directly with the hotel</li>
-                                        </ul>
-                                    </Typography>
-                                </Box>
-                            </Modal>
+                                Explore Events
+                            </button>
                         </div>
-                    </div>
+                    ) : (
+                        cart.map(item => (
+                            <div key={item.id} className="relative flex flex-col md:flex-row bg-white rounded-xl shadow-lg overflow-hidden min-h-[180px] mb-4">
+                                <div className="w-full md:w-1/3 h-48 md:h-auto">
+                                    <img src="/YC (IMG)/cold.webp" alt="Concert" className="w-full h-full object-cover" />
+                                </div>
+                                <div className="flex-1 p-4 relative flex flex-col justify-center">
+                                    <div className="absolute top-4 right-2 text-xl font-semibold text-gray-700">{item.price}</div>
+                                    <h2 className="text-lg font-semibold">{item.section}</h2>
+                                    <p className="text-sm text-gray-500">Row {item.row}</p>
+                                    <p className="text-xs text-gray-400 mt-1">Quantity: {item.quantity}</p>
+                                </div>
+                            </div>
+                        ))
+                    )}
                 </div>
 
                 {/* Right Section */}
-                <div className="space-y-6 p-4 rounded-lg bg-[#e3e3e3cb] shadow-md">
-                    {/* Timer */}
-                    <div className="bg-white p-6 rounded-xl shadow text-center">
-                        <div className="text-4xl font-bold tracking-widest">
-                            {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
+                {cart.length > 0 && (
+                    <div className="space-y-6 p-4 rounded-lg bg-[#e3e3e3cb] shadow-md">
+                        {/* Timer */}
+                        <div className="bg-white p-6 rounded-xl shadow text-center">
+                            <div className="text-4xl font-bold tracking-widest">
+                                {String(minutes).padStart(2, "0")}:{String(seconds).padStart(2, "0")}
+                            </div>
+                            <p className="mt-4 text-sm text-gray-500">
+                                {isRunning ? "Time left to complete booking" : "Timer paused"}
+                            </p>
                         </div>
-                        <p className="mt-4 text-sm text-gray-500">
-                            {isRunning ? "Time left to complete booking" : "Time expired"}
-                        </p>
-                    </div>
 
-                    {/* Continue Button */}
-                    <div className="bg-white p-6 rounded-xl shadow flex flex-col items-center">
-                        <button 
-                            onClick={handlePayment}
-                            className="w-full bg-gradient-to-r bg-purple-600 text-white py-2 rounded-lg font-semibold hover:bg-purple-900 transition"
-                        >
-                            PROCEED TO PAYMENT
-                        </button>
+                        {/* Continue Button */}
+                        <div className="bg-white p-6 rounded-xl shadow flex flex-col items-center">
+                            <button 
+                                onClick={handlePayment}
+                                className="w-full bg-gradient-to-r bg-purple-600 text-white py-2 rounded-lg font-semibold hover:bg-purple-900 transition"
+                            >
+                                PROCEED TO PAYMENT
+                            </button>
 
-                        <div className="w-full h-fit mt-4 bg-gray-100 rounded p-4 text-sm text-gray-700 space-y-2">
-                            <div className="flex justify-between">
-                                <span>Concert Ticket</span>
-                                <span>₹4,999</span>
-                            </div>
-                            <div className="flex justify-between">
-                                <span>Hotel (1 Night)</span>
-                                <span>₹7,200</span>
-                            </div>
-                            <div className="border-t border-gray-300 pt-2 flex justify-between font-medium text-gray-800">
-                                <span>Total</span>
-                                <span>₹12,199</span>
+                            <div className="w-full h-fit mt-4 bg-gray-100 rounded p-4 text-sm text-gray-700 space-y-2">
+                                <div className="flex justify-between">
+                                    <span>Subtotal</span>
+                                    <span>₹{subtotal.toLocaleString()}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span>Service Fee (5%)</span>
+                                    <span>₹{serviceFee.toLocaleString()}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                    <span>Platform Fee (3%)</span>
+                                    <span>₹{platformFee.toLocaleString()}</span>
+                                </div>
+                                <div className="border-t border-gray-300 pt-2 flex justify-between font-medium text-gray-800">
+                                    <span>Total</span>
+                                    <span>₹{total.toLocaleString()}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                )}
             </div>
 
             {/* Terms Section */}

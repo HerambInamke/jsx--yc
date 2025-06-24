@@ -13,7 +13,7 @@ const HotelDetailsTab = (props) => {
     >
         {/* Hotel Image */}
         <img 
-            className="object-cover aspect-square size-25 sm:size-45 rounded-lg  sm:rounded-2xl"
+            className="object-cover aspect-square w-20 sm:w-32 rounded-lg sm:rounded-2xl"
             src={props.coverImg}
             alt=""
         />
@@ -42,7 +42,7 @@ const HotelDetailsTab = (props) => {
             {/* Price and Next button */}
             <div className="flex flex-col ml-auto place-items-center">
                 <h3 className="text-[0.75rem] sm:text-2xl font-light">INR {props.price}</h3>
-                <button className="bg-[#510378] text-white mt-auto text-[0.6rem] sm:text-[1.2rem] font-[300] h-5 sm:h-10 w-18 sm:w-40 rounded-md sm:rounded-lg">NEXT</button>
+                <button className="bg-festival-primary text-white mt-auto text-[0.6rem] sm:text-[1.2rem] font-[300] h-5 sm:h-10 w-18 sm:w-40 rounded-md sm:rounded-lg">NEXT</button>
             </div>
 
         </div>

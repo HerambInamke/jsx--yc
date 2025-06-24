@@ -251,6 +251,59 @@ export default function ConcertDetails() {
           </motion.div>
         </div>
       )}
+
+      {/* Sticky Venue Map and Navigation Tabs for Coldplay */}
+      {id === '1' && (
+        <div className="container mt-8">
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Sticky Map */}
+            <div className="lg:w-1/2">
+              <div className="bg-white rounded-xl p-6 shadow-md sticky top-24 z-20">
+                <h2 className="text-xl font-semibold mb-4 text-gray-800">Venue Map</h2>
+                <div className="relative overflow-hidden rounded-lg">
+                  <img 
+                    src="/YC (IMG)/VSHA19_SeatingMap_ConcertEnd-jpg.webp"
+                    alt="Venue Map" 
+                    className="w-full h-auto transition-transform hover:scale-105 duration-300"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white text-xs p-2 text-center">
+                    Click to enlarge
+                  </div>
+                </div>
+                {/* Ticker-style scrolling */}
+                <div className="mt-6 overflow-x-auto whitespace-nowrap border-t pt-3 animate-marquee text-festival-primary font-semibold text-sm">
+                  <span className="inline-block mr-8">VIP Section: Premium viewing • Dedicated entrance • Lounge access</span>
+                  <span className="inline-block mr-8">General Admission: Standing area • First come, first served • Main facilities</span>
+                  <span className="inline-block mr-8">Parking • Shuttle Service • Food & Beverage • Medical Services</span>
+                </div>
+              </div>
+            </div>
+            {/* Navigation Tabs */}
+            <div className="lg:w-1/2 flex flex-col gap-6">
+              <div className="flex space-x-4 mb-4 sticky top-8 z-30 bg-white py-2 rounded shadow">
+                <button onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})} className="px-4 py-2 rounded-lg font-semibold text-festival-primary hover:bg-festival-primary/10 transition">Data</button>
+                <button onClick={() => window.location.hash = '#upcoming'} className="px-4 py-2 rounded-lg font-semibold text-festival-primary hover:bg-festival-primary/10 transition">Upcoming Shows</button>
+                <button onClick={() => window.location.hash = '#past'} className="px-4 py-2 rounded-lg font-semibold text-festival-primary hover:bg-festival-primary/10 transition">Past Shows</button>
+              </div>
+              {/* Placeholder for tab content, can be replaced with real data */}
+              <div id="upcoming" className="bg-white rounded-xl shadow p-6">
+                <h3 className="text-lg font-bold mb-2">Upcoming Shows</h3>
+                <ul className="list-disc pl-5 text-gray-700">
+                  <li>April 15, 2025 – Mumbai</li>
+                  <li>May 2, 2025 – Delhi</li>
+                </ul>
+              </div>
+              <div id="past" className="bg-white rounded-xl shadow p-6 mt-4">
+                <h3 className="text-lg font-bold mb-2">Past Shows</h3>
+                <ul className="list-disc pl-5 text-gray-700">
+                  <li>March 10, 2024 – Bangalore</li>
+                  <li>February 5, 2024 – Hyderabad</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
