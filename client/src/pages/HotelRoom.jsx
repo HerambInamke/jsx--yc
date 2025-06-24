@@ -14,6 +14,7 @@ const HotelRoom = () => {
     // Lifted state for the selected room
     const [selectedRoom, setSelectedRoom] = React.useState(null);
     const [isMapOpen, setIsMapOpen] = React.useState(false);
+    const [numPeople, setNumPeople] = React.useState(1);
 
     const navigate = useNavigate();
     const { addToCart } = useCart();
@@ -160,6 +161,18 @@ const HotelRoom = () => {
                     <div className="mt-6">
                         <p className="text-gray-400 line-through text-sm">₹{(selectedRoom.price * 1.15).toFixed(0)}</p>
                         <p className="text-2xl font-bold">₹{selectedRoom.price}</p>
+                        <div className="flex items-center gap-2 mt-4">
+                            <span className="font-medium">Number of People:</span>
+                            <button
+                                className="px-2 py-1 bg-gray-200 rounded text-lg"
+                                onClick={() => setNumPeople(n => Math.max(1, n - 1))}
+                            >-</button>
+                            <span className="w-8 text-center">{numPeople}</span>
+                            <button
+                                className="px-2 py-1 bg-gray-200 rounded text-lg"
+                                onClick={() => setNumPeople(n => n + 1)}
+                            >+</button>
+                        </div>
                         <Button
                             variant="contained"
                             className="mt-4 text-white"
@@ -175,7 +188,8 @@ const HotelRoom = () => {
                                     row: selectedRoom.location,
                                     image: selectedRoom.img[0],
                                     quantity: 1,
-                                    type: 'hotel'
+                                    type: 'hotel',
+                                    numPeople
                                 });
                                 navigate("/precart");
                             }}

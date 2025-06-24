@@ -1,4 +1,7 @@
+import { useNavigate } from 'react-router-dom';
+
 export default function PackagesPage() {
+  const navigate = useNavigate();
   const packages = [
     {
       name: 'Standard Pass',
@@ -28,7 +31,7 @@ export default function PackagesPage() {
         <h1 className="text-4xl font-bold mb-12">Festival Packages</h1>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {packages.map((pkg) => (
+          {packages.map((pkg, idx) => (
             <div
               key={pkg.name}
               className="bg-white rounded-lg shadow-lg overflow-hidden"
@@ -46,8 +49,11 @@ export default function PackagesPage() {
                     </li>
                   ))}
                 </ul>
-                <button className="w-full bg-festival-purple text-white py-2 rounded-md hover:bg-festival-purple-dark transition-colors">
-                  MORE INFO
+                <button
+                  className="w-full bg-festival-primary-dark text-white py-2 rounded-md hover:bg-festival-primary transition-colors mb-2"
+                  onClick={() => navigate(`/packages/${idx + 1}`)}
+                >
+                  View Details
                 </button>
               </div>
             </div>
@@ -55,5 +61,5 @@ export default function PackagesPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
